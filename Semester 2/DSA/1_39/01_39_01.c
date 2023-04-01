@@ -1,3 +1,6 @@
+/*
+Latest version of the code is always find-able at 'https://github.com/Hurley2017/JU_SUBMISSIONS.git'
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
