@@ -25,7 +25,7 @@ class ShowClass
     {
         System.out.println(arg);
     }
-    //While not adding a show function for double parameters it automatically tries to invoke the show function with short type parameter and fails to convert type
+    //While not adding a show function for double type parameter it automatically tries to invoke the show function with short type parameter and fails to convert type
     void show(double arg)
     {
         System.out.println(arg);
