@@ -2,7 +2,7 @@ class Main
 {
     public static void main(String[] Tusher)
     {
-        System.out.println("Question 2 : ");
+        System.out.println("Question 2 :");
         int len;
         String Arguments[] = Tusher;
         len = Arguments.length;

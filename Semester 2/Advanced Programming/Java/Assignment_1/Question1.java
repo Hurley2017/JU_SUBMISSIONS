@@ -6,7 +6,7 @@ class Main
         short a, b;
         int answer;
         Scanner buffer = new Scanner(System.in);
-        System.out.println("Question 1 : ");
+        System.out.println("Question 1 :");
         System.out.println("Enter first short integer : ");
         a = buffer.nextShort();
         System.out.println("Enter second short integer : ");
