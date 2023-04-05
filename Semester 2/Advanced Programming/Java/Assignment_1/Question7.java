@@ -18,7 +18,7 @@ class Main
         Student S2 = new Student();
         S1.Setters(StudentName, ClassRoll, Score);
         S1.Getters();
-        S2 = S1.Copy(S2);
+        // S1.Copy(S2);
         S2.Getters();
         buffer.close();
     }
@@ -40,11 +40,10 @@ class Student
         System.out.println("Roll of the student is - " + ClassRoll + ".");
         System.out.println("Score of the student is - " + Score + ".");
     }
-    Student Copy(Student Subject)
+    void Copy(Student Subject)
     {
         Subject.StudentName = this.StudentName;
         Subject.ClassRoll = this.ClassRoll;
         Subject.Score = this.Score;
-        return Subject;
     }
 }
