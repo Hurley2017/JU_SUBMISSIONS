@@ -8,45 +8,70 @@ typedef struct Slist
 void newline();
 struct Slist *init(int size);
 void display(struct Slist *head);
+void finsert(struct Slist **head, int value);
+void einsert(struct Slist **head, int value);
 int main()
 {
-    struct Slist head, front;
-    head = *init(3);
-    display(&head);
-    front.value = 0;
-    front.next = &head;
-    head = front;
-    display(&front);
+    int dummy = 69;
+    struct Slist *head;
+    head = init(3);
+    newline();
+    display(head);
+    newline();
+    finsert(&head, dummy);
+    display(head);
+    newline();
+    einsert(&head, dummy);
+    display(head);
+    newline();
     return 0;
 }
-void finsert(struct Slist **head, int value) {
+void finsert(struct Slist **head, int value)
+{
     struct Slist *fNode = (struct Slist*)malloc(sizeof(struct Slist));
     fNode->value = value;
     fNode->next = *head;
     *head = fNode;
 }
-void einsert(struct Slist **head, int value) {
+void einsert(struct Slist **head, int value)
+{
     struct Slist *eNode = (struct Slist*)malloc(sizeof(struct Slist));
     eNode->value = value;
     eNode->next = NULL;
-    *head = fNode;
+    if (*head == NULL)
+    {
+        *head = eNode;
+    }
+    else
+    {
+        struct Slist *temp = *head;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = eNode;
+    }
 }
-struct Slist *init(int size) {
+struct Slist *init(int size)
+{
     struct Slist *head = NULL;
     struct Slist *temp = NULL;
     struct Slist *p = NULL;
-
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++)
+    {
         temp = (struct Slist*)malloc(sizeof(struct Slist));
         printf("Enter the value of node %d: ", i + 1);
         scanf("%d", &(temp->value));
         temp->next = NULL;
-
-        if (head == NULL) {
+        if (head == NULL)
+        {
             head = temp;
-        } else {
+        }
+        else
+        {
             p = head;
-            while (p->next != NULL) {
+            while (p->next != NULL)
+            {
                 p = p->next;
             }
             p->next = temp;
