@@ -10,6 +10,7 @@ struct Slist *init(int size);
 void display(struct Slist *head);
 void finsert(struct Slist **head, int value);
 void einsert(struct Slist **head, int value);
+void kinsert(struct Slist **head, int value, int k);
 int main()
 {
     int dummy = 69;
@@ -24,6 +25,9 @@ int main()
     einsert(&head, dummy);
     display(head);
     newline();
+    kinsert(&head, dummy, 2);
+    newline();
+    display(head);
     return 0;
 }
 void finsert(struct Slist **head, int value)
@@ -51,6 +55,26 @@ void einsert(struct Slist **head, int value)
         }
         temp->next = eNode;
     }
+}
+void kinsert(struct Slist **head, int value, int k)
+{
+    struct Slist *kNode = (struct Slist*)malloc(sizeof(struct Slist));
+    kNode->value = value;
+    kNode->next = NULL;
+    struct Slist *temp = *head;
+    while(--k != 0)
+    {
+        if(temp->next == NULL)
+        {
+            printf("There is no kth node [ERROR].");    
+        }
+        else
+        {
+            temp = temp->next;
+        }
+    }
+    kNode->next = temp->next;
+    temp->next = kNode;
 }
 struct Slist *init(int size)
 {
