@@ -11,6 +11,9 @@ void display(struct Slist *head);
 void finsert(struct Slist **head, int value);
 void einsert(struct Slist **head, int value);
 void kinsert(struct Slist **head, int value, int k);
+void insertk(struct Slist **head, int value, int k);
+void kvalinsert(struct Slist **head, int value, int k);
+void insertkval(struct Slist **head, int value, int k);
 int main()
 {
     int dummy = 69;
@@ -19,15 +22,18 @@ int main()
     newline();
     display(head);
     newline();
-    finsert(&head, dummy);
-    display(head);
-    newline();
-    einsert(&head, dummy);
-    display(head);
-    newline();
     kinsert(&head, dummy, 2);
+    display(head);
+    newline();
+    insertk(&head, dummy, 2);
+    display(head);
+    kvalinsert(&head, dummy, 3);
     newline();
     display(head);
+    insertkval(&head, dummy, 3);
+    newline();
+    display(head);
+    newline();
     return 0;
 }
 void finsert(struct Slist **head, int value)
@@ -56,22 +62,96 @@ void einsert(struct Slist **head, int value)
         temp->next = eNode;
     }
 }
+void insertk(struct Slist **head, int value, int k)
+{
+    k++;
+    struct Slist *kNode = (struct Slist*)malloc(sizeof(struct Slist));
+    kNode->value = value;
+    kNode->next = NULL;
+    if (*head == NULL || k == 1)
+    {
+        kNode->next = *head;
+        *head = kNode;
+        return;
+    }
+    struct Slist *temp = *head;
+    for (int i = 0; i < k - 2 && temp != NULL; i++)
+    {
+        temp = temp->next;
+    }
+    if (temp == NULL)
+    {
+        printf("The linked list has less than %d nodes.\n", k - 1);
+        return;
+    }
+    kNode->next = temp->next;
+    temp->next = kNode;
+}
 void kinsert(struct Slist **head, int value, int k)
 {
     struct Slist *kNode = (struct Slist*)malloc(sizeof(struct Slist));
     kNode->value = value;
     kNode->next = NULL;
-    struct Slist *temp = *head;
-    while(--k != 0)
+    if (*head == NULL)
     {
-        if(temp->next == NULL)
+        *head = kNode;
+        return;
+    }
+    struct Slist *temp = *head;
+    for (int i = 0; i < k && temp != NULL; i++)
+    {
+        temp = temp->next;
+    }
+    if (temp == NULL)
+    {
+        printf("The linked list has less than %d nodes.\n", k);
+        return;
+    }
+    kNode->next = temp->next;
+    temp->next = kNode;
+}
+void kvalinsert(struct Slist **head, int value, int k)
+{
+    int flag = 0;
+    struct Slist *kNode = (struct Slist*)malloc(sizeof(struct Slist));
+    kNode->value = value;
+    kNode->next = NULL;
+    struct Slist *temp = *head;
+    while(temp != NULL)
+    {
+        if(temp->value == k)
         {
-            printf("There is no kth node [ERROR].");    
+            kNode->next = temp->next;
+            temp->next = kNode;
+            flag = 1;
+            break;
         }
-        else
-        {
-            temp = temp->next;
-        }
+        temp = temp->next;
+    }
+    if(flag == 0)
+    {
+        printf("Node is not found by the particular value.");
+        newline();
+    }
+}
+void insertkval(struct Slist **head, int value, int k)
+{
+    struct Slist *kNode = (struct Slist*)malloc(sizeof(struct Slist));
+    kNode->value = value;
+    kNode->next = NULL;
+    if (*head == NULL || (*head)->value == k)
+    {
+        kNode->next = *head;
+        *head = kNode;
+        return;
+    }
+    struct Slist *temp = *head;
+    while (temp->next != NULL && temp->next->value != k) {
+        temp = temp->next;
+    }
+    if (temp->next == NULL) {
+        printf("The linked list does not contain the value %d.\n", value);
+        return;
     }
     kNode->next = temp->next;
     temp->next = kNode;
