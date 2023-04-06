@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct Slist
+{
+    int value;
+    struct Slist *next;
+} Slist;
+void newline();
+struct Slist *init(int size);
+void display(struct Slist *head);
+int main()
+{
+    struct Slist head, front;
+    head = *init(3);
+    display(&head);
+    front.value = 0;
+    front.next = &head;
+    head = front;
+    display(&front);
+    return 0;
+}
+void finsert(struct Slist **head, int value) {
+    struct Slist *fNode = (struct Slist*)malloc(sizeof(struct Slist));
+    fNode->value = value;
+    fNode->next = *head;
+    *head = fNode;
+}
+void einsert(struct Slist **head, int value) {
+    struct Slist *eNode = (struct Slist*)malloc(sizeof(struct Slist));
+    eNode->value = value;
+    eNode->next = NULL;
+    *head = fNode;
+}
+struct Slist *init(int size) {
+    struct Slist *head = NULL;
+    struct Slist *temp = NULL;
+    struct Slist *p = NULL;
+
+    for (int i = 0; i < size; i++) {
+        temp = (struct Slist*)malloc(sizeof(struct Slist));
+        printf("Enter the value of node %d: ", i + 1);
+        scanf("%d", &(temp->value));
+        temp->next = NULL;
+
+        if (head == NULL) {
+            head = temp;
+        } else {
+            p = head;
+            while (p->next != NULL) {
+                p = p->next;
+            }
+            p->next = temp;
+        }
+    }
+    return head;
+}
+void display(struct Slist *head)
+{
+    while (head != NULL)
+    {
+        printf("%d ", head->value);
+        head = head->next;
+    }
+}
+void newline()
+{
+    printf("\n");
+}
