@@ -21,14 +21,16 @@ void fdelete(struct Slist **head);
 void edelete(struct Slist **head);
 void kdelete(struct Slist **head, int k);
 void deletek(struct Slist **head, int k);
+void deleteknode(struct Slist **head, int k);
+void deletebyval(struct Slist **head, int target);
 int main()
 {
     int dummy = 69;
     struct Slist *head;
-    head = init(3);
+    head = init(4);
     newline();
     display(head);
-    kdelete(&head, 0);
+    deletebyval(&head, 4);
     newline();
     display(head);
     newline();
@@ -104,6 +106,48 @@ void deletek(struct Slist **head, int k)
         }
     }
     
+}
+void deletebyval(struct Slist **head, int target)
+{
+    struct Slist *temp = *head;
+    if((*head)->value == target)
+    {
+        
+        (*head) = (*head)->next;
+    }
+    else
+    {
+        while((*head)->next->value != target)
+        {
+            (*head) = (*head)->next;
+        }
+        (*head)->next = (*head)->next->next;
+        *head = temp;
+    }
+}
+void deleteknode(struct Slist **head, int k)
+{
+    struct Slist *temp = *head;
+    if (k == 0)
+    {
+        *head = temp->next;
+    }
+    else
+    {
+        for(int i = 1; temp != NULL && i < k; i++)
+        {
+            temp = temp->next;
+        }
+        if(temp == NULL || temp->next == NULL)
+        {
+            printf("ERROR");
+        }
+        else
+        {
+            struct Slist* next = temp->next->next;
+            temp->next = next;
+        }
+    }
 }
 void finsert(struct Slist **head, int value)
 {
