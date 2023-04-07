@@ -14,7 +14,6 @@ void reverse(struct Slist **head);
 void sort(struct Slist **head);
 void search(struct Slist head, int target);
 void merge(struct Slist **head);
-int getSize(struct Slist **head);
 void concatenate(struct Slist **head);
 int isequal(struct Slist **head);
 void UI_Statements();
@@ -449,17 +448,6 @@ int isequal(struct Slist **head)
         }
     }
     return 1;
-}
-int getSize(struct Slist **head)
-{
-    int count = 0;
-    struct Slist *pointer = *head;
-    while(pointer != NULL)
-    {
-        count++;
-        pointer = pointer->next;
-    }
-    return count;
 }
 void merge(struct Slist **head)
 {
