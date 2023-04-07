@@ -12,6 +12,10 @@ void display(struct Slist *head);
 void reverse(struct Slist **head);
 void sort(struct Slist **head);
 void search(struct Slist head, int target);
+void merge(struct Slist **head);
+int getSize(struct Slist **head);
+void concatenate(struct Slist **head);
+int isequal(struct Slist **head);
 //Insert Functions
 void finsert(struct Slist **head, int value);
 void einsert(struct Slist **head, int value);
@@ -28,17 +32,83 @@ void deleteknode(struct Slist **head, int k);
 void deletebyval(struct Slist **head, int target);
 int main()
 {
-    int dummy = 69;
     struct Slist *head;
-    head = init(4);
-    newline();
-    display(head);
-    sort(&head);
-    newline();
-    display(head);
-    newline();
-    search((*head), 3);
     return 0;
+}
+int isequal(struct Slist **head)
+{
+    int newsize;
+    struct Slist *newlist;
+    struct Slist *pointer = *head;
+    printf("Enter the size of the new linked list.");
+    scanf("%d", &newsize);
+    newlist = init(newsize);
+    if(pointer == NULL && newlist == NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        while(pointer != NULL || newlist != NULL)
+        {
+            if((pointer != NULL && newlist == NULL) || (pointer == NULL && newlist != NULL))
+            {
+                return 0;
+            }
+            else
+            {
+                if(pointer->value != newlist->value)
+                {
+                    return 0;
+                }
+            }
+            pointer = pointer->next;
+            newlist = newlist->next;
+        }
+    }
+    return 1;
+}
+int getSize(struct Slist **head)
+{
+    int count = 0;
+    struct Slist *pointer = *head;
+    while(pointer != NULL)
+    {
+        count++;
+        pointer = pointer->next;
+    }
+    return count;
+}
+void merge(struct Slist **head)
+{
+    int newsize;
+    struct Slist *newlist;
+    struct Slist *pointer = *head;
+    printf("Enter the size of the new linked list.");
+    scanf("%d", &newsize);
+    newlist = init(newsize);
+    while((*head)->next != NULL)
+    {
+        (*head) = (*head)->next;
+    }
+    (*head)->next = newlist;
+    (*head) = pointer;
+    sort(head);
+}
+void concatenate(struct Slist **head)
+{
+    int newsize;
+    struct Slist *newlist;
+    struct Slist *pointer = *head;
+    printf("Enter the size of the new linked list.");
+    scanf("%d", &newsize);
+    newlist = init(newsize);
+    while((*head)->next != NULL)
+    {
+        (*head) = (*head)->next;
+    }
+    (*head)->next = newlist;
+    (*head) = pointer;
 }
 void search(struct Slist head, int target)
 {
