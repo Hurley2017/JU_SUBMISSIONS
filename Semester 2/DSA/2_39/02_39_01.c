@@ -10,6 +10,7 @@ void newline();
 struct Slist *init(int size);
 void display(struct Slist *head);
 void reverse(struct Slist **head);
+void sort(struct Slist **head);
 //Insert Functions
 void finsert(struct Slist **head, int value);
 void einsert(struct Slist **head, int value);
@@ -31,7 +32,7 @@ int main()
     head = init(4);
     newline();
     display(head);
-    reverse(&head);
+    sort(&head);
     newline();
     display(head);
     newline();
@@ -62,7 +63,39 @@ void reverse(struct Slist **head)
         (*head) = (*head)->next;
     }
     (*head) = update;
-} 
+}
+void sort(struct Slist **head)
+{
+    int *temparr, count = 0;
+    temparr = (int*)malloc(sizeof(int));
+    struct Slist *pointer = *head;
+    struct Slist *update = *head;
+    while(pointer != NULL)
+    {
+        temparr = (int *)realloc(temparr, (count+1)*sizeof(int));
+        *(temparr+count) = pointer->value;
+        count++;
+        pointer = pointer->next;
+    }
+    for(int i=0; i<count-1; i++)
+    {
+        for(int j=i; j<count; j++)
+        {
+            if(*(temparr+i) > *(temparr + j))
+            {
+                int temp = *(temparr + i);
+                *(temparr + i) = *(temparr + j);
+                *(temparr + j) = temp;
+            }
+        }
+    }
+    for(int i=0; i<count; i++)
+    {
+        (*head)->value = *(temparr+i);
+        (*head) = (*head)->next;
+    }
+    (*head) = update;
+}
 void fdelete(struct Slist **head)
 {
     if(head == NULL)
