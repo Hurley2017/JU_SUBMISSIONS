@@ -5,15 +5,22 @@ typedef struct Slist
     int value;
     struct Slist *next;
 } Slist;
+//Miscelaneous Functions
 void newline();
 struct Slist *init(int size);
 void display(struct Slist *head);
+//Insert Functions
 void finsert(struct Slist **head, int value);
 void einsert(struct Slist **head, int value);
 void kinsert(struct Slist **head, int value, int k);
 void insertk(struct Slist **head, int value, int k);
 void kvalinsert(struct Slist **head, int value, int k);
 void insertkval(struct Slist **head, int value, int k);
+//Delete Functions
+void fdelete(struct Slist **head);
+void edelete(struct Slist **head);
+void kdelete(struct Slist **head, int k);
+void deletek(struct Slist **head, int k);
 int main()
 {
     int dummy = 69;
@@ -21,20 +28,82 @@ int main()
     head = init(3);
     newline();
     display(head);
-    newline();
-    kinsert(&head, dummy, 2);
-    display(head);
-    newline();
-    insertk(&head, dummy, 2);
-    display(head);
-    kvalinsert(&head, dummy, 3);
-    newline();
-    display(head);
-    insertkval(&head, dummy, 3);
+    kdelete(&head, 0);
     newline();
     display(head);
     newline();
     return 0;
+}
+void fdelete(struct Slist **head)
+{
+    if(head == NULL)
+    {
+        printf("List is empty [ERROR].");
+    }
+    else
+    {
+        (*head) = (*head)->next;
+    }
+}
+void edelete(struct Slist **head)
+{
+    if(head == NULL)
+    {
+        printf("List is empty [ERROR].");
+    }
+    else
+    {
+        struct Slist *temp = *head;
+        while(temp->next->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = NULL;
+    }
+}
+void kdelete(struct Slist **head, int k)
+{
+    struct Slist *temp = *head;
+    int i = 0;
+    while((*head) != NULL)
+    {
+        if(i == k)
+        {
+            (*head)->next = (*head)->next->next;
+            break;
+        }
+        else
+        {
+            (*head) = (*head)->next;
+        }
+        i++;
+    }
+    (*head) = temp;
+}
+void deletek(struct Slist **head, int k)
+{
+    struct Slist *temp = *head;
+    if (k == 1)
+    {
+        *head = temp->next;
+    }
+    else
+    {
+        for(int i = 1; temp != NULL && i < k - 1; i++)
+        {
+            temp = temp->next;
+        }
+        if(temp == NULL || temp->next == NULL)
+        {
+            printf("ERROR");
+        }
+        else
+        {
+            struct Slist* next = temp->next->next;
+            temp->next = next;
+        }
+    }
+    
 }
 void finsert(struct Slist **head, int value)
 {
