@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 typedef struct Slist
 {
     int value;
@@ -16,6 +17,7 @@ void merge(struct Slist **head);
 int getSize(struct Slist **head);
 void concatenate(struct Slist **head);
 int isequal(struct Slist **head);
+void UI_Statements();
 //Insert Functions
 void finsert(struct Slist **head, int value);
 void einsert(struct Slist **head, int value);
@@ -32,8 +34,388 @@ void deleteknode(struct Slist **head, int k);
 void deletebyval(struct Slist **head, int target);
 int main()
 {
+    int sw, size = INT_MIN, value, k;
     struct Slist *head;
+    UI_Statements();
+    while(1)
+    {
+        printf("Enter your choice : ");
+        scanf("%d", &sw);
+        switch (sw)
+        {
+            case 1:
+                newline();
+                printf("Enter the size of the new list : ");
+                scanf("%d", &size);
+                if(size < 1)
+                {
+                    printf("List of size less than 1 could not be created. [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    head = init(size);
+                    newline();
+                    printf("Successfully created a list of size %d.", size);
+                    newline();
+                }
+                break;
+            case 2:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("The list is : ");
+                    display(head);
+                    newline();
+                }
+                break;
+            case 3:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Enter the value of the new node : ");
+                    scanf("%d", &value);
+                    finsert(&head, value);
+                    newline();
+                }
+                break;
+            case 4:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Enter the value of the new node : ");
+                    scanf("%d", &value);
+                    einsert(&head, value);
+                    newline();
+                }
+                break;
+            case 5:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Enter the value of the new node : ");
+                    scanf("%d", &value);
+                    printf("Enter the value of k : ");
+                    scanf("%d", &k);
+                    kinsert(&head, value, k);
+                    newline();
+                }
+                break;
+            case 6:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Enter the value of the new node : ");
+                    scanf("%d", &value);
+                    printf("Enter the value of target node : ");
+                    scanf("%d", &k);
+                    kvalinsert(&head, value, k);
+                    newline();
+                }
+                break;
+            case 7:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Enter the value of the new node : ");
+                    scanf("%d", &value);
+                    printf("Enter the value of k : ");
+                    scanf("%d", &k);
+                    insertk(&head, value, k);
+                    newline();
+                }
+                break;
+            case 8:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Enter the value of the new node : ");
+                    scanf("%d", &value);
+                    printf("Enter the value of target node : ");
+                    scanf("%d", &k);
+                    insertkval(&head, value, k);
+                    newline();
+                }
+                break;
+            case 9:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Deleting the first node : ");
+                    fdelete(&head);
+                    newline();
+                }
+                break;
+            case 10:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Deleting the last node : ");
+                    edelete(&head);
+                    newline();
+                }
+                break;
+            case 11:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Enter the value of k : ");
+                    scanf("%d", &k);
+                    kdelete(&head, k);
+                    newline();
+                }
+                break;
+            case 12:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Enter the value of k : ");
+                    scanf("%d", &k);
+                    deletek(&head, k);
+                    newline();
+                }
+                break;
+            case 13:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Enter the value of k : ");
+                    scanf("%d", &k);
+                    deleteknode(&head, k);
+                    newline();
+                }
+                break;
+            case 14:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Enter the value of target node : ");
+                    scanf("%d", &value);
+                    deleteknode(&head, value);
+                    newline();
+                }
+                break;
+            case 15:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Reversing the list : ");
+                    reverse(&head);
+                    newline();
+                }
+                break;
+            case 16:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Sorting the list : ");
+                    sort(&head);
+                    newline();
+                }
+                break;
+            case 17:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    printf("Enter the value of target node : ");
+                    scanf("%d", &value);
+                    search((*head), value);
+                    newline();
+                }
+                break;
+            case 18:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    merge(&head);
+                    newline();
+                }
+                break;
+            case 19:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    concatenate(&head);
+                    newline();
+                }
+                break;
+            case 20:
+                newline();
+                if(size == INT_MIN)
+                {
+                    printf("No list is yet created! [ERROR].");
+                    newline();
+                }
+                else
+                {
+                    if(isequal(&head))
+                    {
+                        printf("TRUE");
+                    }
+                    else
+                    {
+                        printf("FALSE");
+                    }
+                }
+                break;
+            case 21:
+                system("cls");
+                UI_Statements();
+                break;
+            case 22:
+                system("clear");
+                UI_Statements();
+                break;
+            case 23:
+                return 0;
+            default:
+                break;
+        }
+    }
     return 0;
+}
+void UI_Statements()
+{
+    printf("A menu-driven program that performs the following on a single linked list.");
+    newline();
+    newline();
+    printf("1. Create a linked list.");
+    newline();
+    printf("2. Print the content of the list.");
+    newline();
+    printf("3. Insert an element at the front of the list.");
+    newline();
+    printf("4. Insert an element at the end of the list.");
+    newline();
+    printf("5. Insert a node after the kth node.");
+    newline();
+    printf("6. Insert a node after the node (first from the start) containing a given value.");
+    newline();
+    printf("7. Insert a node before the kth node.");
+    newline();
+    printf("8. Insert a node before the node (first from the start) containing a given value.");
+    newline();
+    printf("9. Delete the first node.");
+    newline();
+    printf("10. Delete the last node.");
+    newline();
+    printf("11. Delete a node after the kth node.");
+    newline();
+    printf("12. Delete a node before the kth node.");
+    newline();
+    printf("13. Delete the kth node.");
+    newline();
+    printf("14. Delete the node(first from the start) containing a specified value.");
+    newline();
+    printf("15. Find the reverse of a list(not just printing in reverse).");
+    newline();
+    printf("16. Sort the list.");
+    newline();
+    printf("17. Search a given element.");
+    newline();
+    printf("18. Merge two lists; those are in ascending order.");
+    newline();
+    printf("19. Concatenate two list.");
+    newline();
+    printf("20. Find if two lists are equal(Boolean output).");
+    newline();
+    printf("21. Clear Screen (For Windows).");
+    newline();
+    printf("22. Clear Screen (For Linux).");
+    newline();
+    printf("23. Exit.");
+    newline();
+    newline();
 }
 int isequal(struct Slist **head)
 {
