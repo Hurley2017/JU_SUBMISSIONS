@@ -9,6 +9,7 @@ typedef struct Slist
 void newline();
 struct Slist *init(int size);
 void display(struct Slist *head);
+void reverse(struct Slist **head);
 //Insert Functions
 void finsert(struct Slist **head, int value);
 void einsert(struct Slist **head, int value);
@@ -30,12 +31,38 @@ int main()
     head = init(4);
     newline();
     display(head);
-    deletebyval(&head, 4);
+    reverse(&head);
     newline();
     display(head);
     newline();
     return 0;
 }
+void reverse(struct Slist **head)
+{
+    int *temparr, count = 0;
+    temparr = (int*)malloc(sizeof(int));
+    struct Slist *pointer = *head;
+    struct Slist *update = *head;
+    while(pointer != NULL)
+    {
+        temparr = (int *)realloc(temparr, (count+1)*sizeof(int));
+        *(temparr+count) = pointer->value;
+        count++;
+        pointer = pointer->next;
+    }
+    for(int i=0; i<count/2; i++)
+    {
+        int temp = *(temparr + i);
+        *(temparr + i) = *(temparr + count - 1 - i);
+        *(temparr + count -1 - i) = temp;
+    }
+    for(int i=0; i<count; i++)
+    {
+        (*head)->value = *(temparr+i);
+        (*head) = (*head)->next;
+    }
+    (*head) = update;
+} 
 void fdelete(struct Slist **head)
 {
     if(head == NULL)
