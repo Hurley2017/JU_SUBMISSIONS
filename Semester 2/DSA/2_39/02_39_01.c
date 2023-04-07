@@ -11,6 +11,7 @@ struct Slist *init(int size);
 void display(struct Slist *head);
 void reverse(struct Slist **head);
 void sort(struct Slist **head);
+void search(struct Slist head, int target);
 //Insert Functions
 void finsert(struct Slist **head, int value);
 void einsert(struct Slist **head, int value);
@@ -36,7 +37,30 @@ int main()
     newline();
     display(head);
     newline();
+    search((*head), 3);
     return 0;
+}
+void search(struct Slist head, int target)
+{
+    newline();
+    int index = 0;
+    int flag = 0;
+    while(head.next != NULL)
+    {
+        if(head.value == target)
+        {
+            printf("Value found at index %d.", index);
+            flag = 1;
+            break;
+        }
+        index++;
+        head = *(head.next);
+    }
+    if(!flag)
+    {
+        printf("Valus is not found in the list.");
+    }
+    newline();
 }
 void reverse(struct Slist **head)
 {
