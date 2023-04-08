@@ -11,7 +11,8 @@ void display(struct Slist *head);
 void newline();
 void UI_Statements();
 struct Slist *paddition(struct Slist *poly1, struct Slist *poly2);
-struct Slist *psubtration(struct Slist *poly1, struct Slist *poly2);
+struct Slist *psubtraction(struct Slist *poly1, struct Slist *poly2);
+struct Slist *pmultiplication(struct Slist *poly1, struct Slist *poly2);
 int getSize(struct Slist *head);
 struct Slist *StaticInit(int size);
 int max(int A, int B);
@@ -24,7 +25,7 @@ int main()
     newline();
     printf("Enter the degree : ");
     scanf("%d", &size1);
-    poly1 = init(size1);
+    poly1 = init((size1+1));
     newline();
     printf("Displaying polynomial 1 : ");
     display(poly1);
@@ -34,7 +35,7 @@ int main()
     newline();
     printf("Enter the degree : ");
     scanf("%d", &size2);
-    poly2 = init(size2);
+    poly2 = init((size2+1));
     newline();
     printf("Displaying polynomial 2 : ");
     display(poly2);
@@ -52,21 +53,35 @@ int main()
                 newline();
                 display(addition);
                 newline();
+                newline();
                 break;
             case 2:
                 newline();
-                subtraction = psubtration(poly1, poly2);
+                subtraction = psubtraction(poly1, poly2);
                 newline();
                 display(subtraction);
                 newline();
+                newline();
                 break;
-            // case 3:
-            //     newline();
-            //     multiplication = pmultiplication(poly1, poly2);
-            //     break;
-            // case 4:
-            //     newline();
-            //     return 0;
+            case 3:
+                newline();
+                multiplication = pmultiplication(poly1, poly2);
+                newline();
+                display(multiplication);
+                newline();
+                newline();
+                break;
+            case 4:
+                newline();
+                system("cls");
+                break;
+            case 5:
+                newline();
+                system("clear");
+                break;
+            case 6:
+                newline();
+                return 0;
             default:
                 printf("Invalid choice :");
                 newline();
@@ -86,6 +101,31 @@ int max(int A, int B)
     {
         return B;
     }
+}
+struct Slist *pmultiplication(struct Slist *poly1, struct Slist *poly2)
+{
+    Slist *multiplication = StaticInit(getSize(poly1)+getSize(poly2)-1);
+    Slist *Mpointer, *pointer1, *pointer2;
+    pointer1 = poly1;
+    pointer2 = poly2;
+    Mpointer = multiplication;
+    while(pointer1 != NULL)
+    {
+        while(Mpointer->power != pointer1->power+pointer2->power)
+        {
+            Mpointer = Mpointer->next;
+        }
+        while(pointer2 != NULL)
+        {
+            Mpointer->coefficient = Mpointer->coefficient + pointer1->coefficient*pointer2->coefficient;
+            pointer2 = pointer2->next;
+            Mpointer = Mpointer->next;
+        }
+        pointer2 = poly2;
+        Mpointer = multiplication;
+        pointer1 = pointer1->next;
+    }
+    return multiplication;
 }
 struct Slist *paddition(struct Slist *poly1, struct Slist *poly2)
 {
@@ -127,7 +167,7 @@ struct Slist *paddition(struct Slist *poly1, struct Slist *poly2)
     poly2 = pointer2;
     return addition;
 }
-struct Slist *psubtration(struct Slist *poly1, struct Slist *poly2)
+struct Slist *psubtraction(struct Slist *poly1, struct Slist *poly2)
 {
     int newSize = max(getSize(poly1), getSize(poly2));
     int pCount = 0;
@@ -186,6 +226,12 @@ void UI_Statements()
     printf("2. Subtraction");
     newline();
     printf("3. Multiplication");
+    newline();
+    printf("4. Clear Screen (For Windows)");
+    newline();
+    printf("5. Clear Screen (For Linux)");
+    newline();
+    printf("6. Exit");
     newline();
     printf("Enter choice : ");
 }
