@@ -255,7 +255,7 @@ int main()
                 {
                     printf("Enter the value of target node : ");
                     scanf("%d", &value);
-                    deleteknode(&head, value);
+                    deletebyval(&head, value);
                     newline();
                 }
                 break;
