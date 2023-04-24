@@ -5,3 +5,4 @@ do
         rm "$file"
     fi
 done
+echo "Successfully removed all temporary files!"

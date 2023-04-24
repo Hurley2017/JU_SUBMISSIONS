@@ -5,3 +5,4 @@ do
         mv "$file" "${file%.sh}.exe"
     fi
 done
+echo "Successfully renames all .sh files to .exe"

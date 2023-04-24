@@ -1,7 +1,6 @@
 #!/bin/bash
 files=0
 directories=0
-
 echo "Files:"
 for entry in *
 do
@@ -19,6 +18,5 @@ do
         ((directories++))
     fi
 done
-
 echo "Number of files: $files"
 echo "Number of directories: $directories"

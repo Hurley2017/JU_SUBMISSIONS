@@ -1,6 +1,5 @@
 #!/bin/bash
 total=0
-
 for entry in *
 do
     if [ -f "$entry" ]; then
@@ -8,5 +7,4 @@ do
         ((total += size))
     fi
 done
-
 echo "Total bytes used: $total"
