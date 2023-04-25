@@ -1,4 +1,5 @@
 //Question 10
+import java.util.*; 
 class Main 
 {
     public static void main(String[] Tusher)
