@@ -128,6 +128,10 @@ class Customer
     void get_cust_info()
     {
         Console print = new Console();
+        if(special)
+        {
+            print.outln("This is a  VIP Customer : ");
+        }
         print.outln("Customer ID : "+cust_id+".");
         print.outln("Name of the customer is : '" + cust_name + "'.");
         print.outln("Phone number of the customer is : "+phone_number+".");
