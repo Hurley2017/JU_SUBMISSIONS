@@ -1,11 +1,97 @@
 import java.util.*;
 class Main
 {
+    static void SystemClear()
+    {
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+    }
+    static void UI_Statements()
+    {
+        Console print = new Console();
+        print.outln("Choose from the following : ");
+        print.outln("1) Bank account information");
+        print.outln("2) Check Credit Limit ");
+        print.outln("3) Check Current Loan Amount ");
+        print.outln("4) Update Kyc Details ");
+        print.outln("5) Apply for Loan ");
+        print.outln("6) Clear Screen ");
+        print.outln("7) Exit");
+        print.out("Choose a number : ");
+    }
     public static void main(String[] Tusher)
     {
-        Console console = new Console();
-        Customer c = new Customer();
-        console.out(c.get_credit_limit());
+        Console print = new Console();
+        int choice;
+        String cust_name, clear;
+        long cust_id, phone_number, loan_amt;
+        boolean special, whilecon=true;
+        Scanner buffer = new Scanner(System.in);
+        Customer c;
+        print.out("Enter the name of the customer : ");
+        cust_name = buffer.nextLine();
+        print.out("Enter the customer id : ");
+        cust_id = buffer.nextLong();
+        print.out("Enter the phone number of the customer : ");
+        phone_number = buffer.nextLong();
+        clear = buffer.nextLine();
+        print.out("Is this customer a VIP? [Y for yes, any other key for no]");
+        clear = buffer.nextLine();
+        if(clear.equals("Y"))
+        {
+            special = true;
+        }
+        else
+        {
+            special = false;
+        }
+        //setting the data
+        c = new Customer(cust_name, cust_id, phone_number, special);
+        SystemClear();
+        while(whilecon)
+        {
+            UI_Statements();
+            choice = buffer.nextInt();
+            switch(choice)
+            {
+                case 1:
+                    c.get_cust_info();
+                    break;
+                case 2:
+                    print.outln("Credit Limit is : "+ c.get_credit_limit()+".");
+                    break;
+                case 3:
+                    print.outln("Current Loan Ammount is : "+c.get_cur_loan_amt()+".");
+                    break;
+                case 4:
+                    clear = buffer.nextLine();
+                    print.out("Enter New Name : ");
+                    cust_name = buffer.nextLine();
+                    print.out("Enter New Phone Number : ");
+                    phone_number = buffer.nextLong();
+                    c.update_kyc(cust_name, phone_number);
+                    break;
+                case 5:
+                    print.out("Enter Loan Amount : ");
+                    loan_amt = buffer.nextLong();
+                    if(c.take_loan(loan_amt))
+                    {
+                        print.outln("Loan sanctioned!!");
+                    }
+                    else 
+                    {
+                        print.outln("Application Rejected!!");
+                    }
+                    break;
+                case 6:
+                    SystemClear();
+                    break;
+                case 7:
+                    whilecon = false;
+                    break;
+            }
+        }
+        buffer.close();
     }
 }
 class Customer
@@ -38,6 +124,13 @@ class Customer
             credit_limit = 500000;
         }
         cur_loan_amt = 0;
+    }
+    void get_cust_info()
+    {
+        Console print = new Console();
+        print.outln("Customer ID : "+cust_id+".");
+        print.outln("Name of the customer is : '" + cust_name + "'.");
+        print.outln("Phone number of the customer is : "+phone_number+".");
     }
     void update_kyc(String new_cust_name, long new_phone_number)
     {
@@ -73,24 +166,48 @@ class Customer
 }
 class Console
 {
-    void out(String Object)
+    void outln()
+    {
+        System.out.println("");
+    }
+    void outln(String Object)
     {
         System.out.println(Object);
+    }
+    void outln(int Object)
+    {
+        System.out.println(Object);
+    }
+    void outln(double Object)
+    {
+        System.out.println(Object);
+    }
+    void outln(long Object)
+    {
+        System.out.println(Object);
+    }
+    void outln(boolean Object)
+    {
+        System.out.println(Object);
+    }
+    void out(String Object)
+    {
+        System.out.print(Object);
     }
     void out(int Object)
     {
-        System.out.println(Object);
+        System.out.print(Object);
     }
     void out(double Object)
     {
-        System.out.println(Object);
+        System.out.print(Object);
     }
     void out(long Object)
     {
-        System.out.println(Object);
+        System.out.print(Object);
     }
     void out(boolean Object)
     {
-        System.out.println(Object);
+        System.out.print(Object);
     }
 }
