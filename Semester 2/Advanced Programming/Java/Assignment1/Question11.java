@@ -104,7 +104,7 @@ class Courses
     }
     void getData()
     {
-        System.out.println("The name of thew course is "+course_name+".");
+        System.out.println("The name of the course is "+course_name+".");
         i.getData();
         t.getData();
     }
