@@ -89,6 +89,9 @@ class Main
                 case 7:
                     whilecon = false;
                     break;
+                default:
+                    print.outln("Invalid Choice!");
+                    break;
             }
         }
         buffer.close();
