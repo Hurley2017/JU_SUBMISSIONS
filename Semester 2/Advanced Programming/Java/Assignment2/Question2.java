@@ -1,33 +1,35 @@
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 class Main 
 {
     public static void main(String[] Tusher)
     {
         
     }
+    void takeS_input()
+    {
+
+    }
 }
 class Common_Properties
 {
-    String name, street, city, state, email_id;
-    int premise_number, pin, phone_number;
+    public String name, street, city, state, email_id;
+    public int premise_number, pin, phone_number;
 }
 class Students extends Common_Properties
 {
     int roll;
     String course_of_study;
-    void setData(String[] string_package, int[] int_package)
+    void setData(int roll, String course_of_study, Common_Properties s)
     {
-        name = string_package[0];
-        street = string_package[1];
-        city = string_package[2];
-        state = string_package[3];
-        email_id = string_package[4];
-        course_of_study = string_package[5];
-        premise_number = int_package[0];
-        pin = int_package[1];
-        phone_number = int_package[2];
-        roll = int_package[3];
+        this.name = s.name;
+        this.street = s.street;
+        this.city = s.city;
+        this.state = s.state;
+        this.email_id = s.email_id;
+        this.course_of_study = course_of_study;
+        this.premise_number = s.premise_number;
+        this.pin = s.pin;
+        this.phone_number = s.phone_number;
+        this.roll = roll;
     }
     void getData()
     {
@@ -51,19 +53,19 @@ class Faculty extends Common_Properties
 {
     int emp_id;
     String department, specialisation;
-    void setData(String[] string_package, int[] int_package)
+    void setData(int emp_id, String department, String specialisation,  Common_Properties f)
     {
-        name = string_package[0];
-        street = string_package[1];
-        city = string_package[2];
-        state = string_package[3];
-        email_id = string_package[4];
-        department = string_package[5];
-        specialisation = string_package[6];
-        premise_number = int_package[0];
-        pin = int_package[1];
-        phone_number = int_package[2];
-        emp_id = int_package[3];
+        this.name = f.name;
+        this.street = f.street;
+        this.city = f.city;
+        this.state = f.state;
+        this.email_id = f.email_id;
+        this.department = department;
+        this.specialisation = specialisation;
+        this.premise_number = f.premise_number;
+        this.pin = f.pin;
+        this.phone_number = f.phone_number;
+        this.emp_id = emp_id;
     }
     void getData()
     {
