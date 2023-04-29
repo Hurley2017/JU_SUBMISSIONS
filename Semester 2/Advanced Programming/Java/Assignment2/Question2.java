@@ -4,10 +4,6 @@ class Main
     {
         
     }
-    void takeS_input()
-    {
-
-    }
 }
 class Common_Properties
 {
@@ -47,6 +43,14 @@ class Students extends Common_Properties
         System.out.println("City : "+city);
         System.out.println("State : "+state);
         System.out.println("Pin : "+pin);
+    }
+    void changeAddress(int index, int[] int_package)
+    {
+        //try if else then change the data!
+    }
+    void changeAddress(int index, String[] string_package)
+    {
+
     }
 }
 class Faculty extends Common_Properties
