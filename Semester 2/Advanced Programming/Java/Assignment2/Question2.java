@@ -1,8 +1,75 @@
+import java.util.Scanner;
 class Main 
 {
     public static void main(String[] Tusher)
     {
-        
+        int sw;
+        boolean con = true;
+        Scanner buffer = new Scanner(System.in);
+        Common_Properties details = new Common_Properties();
+        System.out.print("Enter your name : ");
+        details.name = buffer.nextLine();
+        System.out.println("Information - ");
+        System.out.print("Phone Number : ");
+        details.phone_number = buffer.nextInt();
+        buffer.nextLine();
+        System.out.print("Email ID : ");
+        details.email_id = buffer.nextLine();
+        System.out.println("Address - ");
+        System.out.print("State : ");
+        details.state = buffer.nextLine();
+        System.out.print("City : ");
+        details.city = buffer.nextLine();
+        System.out.print("Pin : ");
+        details.pin = buffer.nextInt();
+        System.out.print("Premise_number : ");
+        details.premise_number = buffer.nextInt();
+        buffer.nextLine();
+        System.out.print("Street : ");
+        details.street = buffer.nextLine();
+        System.out.println("Choose from the following : ");
+        System.out.println("1) Student");
+        System.out.println("2) Teacher");
+        System.out.print("Enter choice : ");
+        sw = buffer.nextInt();
+        while(con)
+        {
+            switch(sw)
+            {
+                case 1:
+                    Students s1 = new Students();
+                    System.out.print("Enter roll : ");
+                    s1.roll = buffer.nextInt();
+                    buffer.nextLine();
+                    System.out.print("Course of Study : ");
+                    s1.course_of_study = buffer.nextLine();
+                    s1.setData(details);
+                    System.out.println("-----------------------");
+                    System.out.println("Displaying : ");
+                    s1.getData();
+                    con = false;
+                    break;
+                case 2:
+                    Faculty member = new Faculty();
+                    System.out.print("Enter roll : ");
+                    member.emp_id = buffer.nextInt();
+                    buffer.nextLine();
+                    System.out.print("Specialisation : ");
+                    member.specialisation = buffer.nextLine();
+                    System.out.print("Department : ");
+                    member.department = buffer.nextLine();
+                    member.setData(details);
+                    System.out.println("-----------------------");
+                    System.out.println("Displaying : ");
+                    member.getData();
+                    con = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+                    break;
+            }
+        }
+        buffer.close();
     }
 }
 class Common_Properties
@@ -12,20 +79,18 @@ class Common_Properties
 }
 class Students extends Common_Properties
 {
-    int roll;
-    String course_of_study;
-    void setData(int roll, String course_of_study, Common_Properties s)
+    public int roll;
+    public String course_of_study;
+    void setData(Common_Properties s)
     {
         this.name = s.name;
         this.street = s.street;
         this.city = s.city;
         this.state = s.state;
         this.email_id = s.email_id;
-        this.course_of_study = course_of_study;
         this.premise_number = s.premise_number;
         this.pin = s.pin;
         this.phone_number = s.phone_number;
-        this.roll = roll;
     }
     void getData()
     {
@@ -57,19 +122,16 @@ class Faculty extends Common_Properties
 {
     int emp_id;
     String department, specialisation;
-    void setData(int emp_id, String department, String specialisation,  Common_Properties f)
+    void setData(Common_Properties f)
     {
         this.name = f.name;
         this.street = f.street;
         this.city = f.city;
         this.state = f.state;
         this.email_id = f.email_id;
-        this.department = department;
-        this.specialisation = specialisation;
         this.premise_number = f.premise_number;
         this.pin = f.pin;
         this.phone_number = f.phone_number;
-        this.emp_id = emp_id;
     }
     void getData()
     {
