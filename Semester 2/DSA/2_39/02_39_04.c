@@ -36,31 +36,40 @@ int main()
         {
             case 1:
                 printf("Configuring 2D Array Specification : ");
+                dim = getDim(people);
+                printf("The specified number of people can be fitted into a 2D Array with %d x %d specification\n", *(dim), *(dim+1));
+                printf("Creating 2D Array of such . . .\n");
+                array2d = create2Darray(*(dim), *(dim+1));
+                printf("Displaying the array : \n");
+                displayArr(array2d, *(dim), *(dim+1));\
+                free(dim);
                 break;
             case 2:
+                createCirclular(head1, people);
+                printf("Successfully created Circular Linked-List of such . . .\n");
+                printf("Displaying the Linked-List\n");
+                display(head1, people);
                 break;
             case 3:
+                createCirclularDual(head2, people);
+                printf("Successfully created Circular Linked-List of such . . .\n");
+                printf("Displaying the Linked-List\n");
+                displayDual(head2, people);
                 break;
             case 4:
+                system("cls");
                 break;
             case 5:
+                system("clear");
                 break;
             case 6:
                 con = 0;
                 break;
             default:
+                printf("Invalid Choice!\n");
                 break;
         }
     }
-    // dim = getDim(people);
-    // printf("%d x %d\n", *(dim), *(dim+1));
-    // array2d = create2Darray(*(dim), *(dim+1));
-    // displayArr(array2d, *(dim), *(dim+1));
-    // createCirclular(head1, people);
-    // display(head1, people);
-    // createCirclularDual(head2, people);
-    // displayDual(head2, people);
-    // free(dim);
     return 0;
 }
 void UI_Statements()
