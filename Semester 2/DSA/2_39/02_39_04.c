@@ -35,12 +35,12 @@ int main()
         switch (sw)
         {
             case 1:
-                printf("Configuring 2D Array Specification : ");
+                printf("Configuring 2D Array Specification : \n");
                 dim = getDim(people);
                 printf("The specified number of people can be fitted into a 2D Array with %d x %d specification\n", *(dim), *(dim+1));
                 printf("Creating 2D Array of such . . .\n");
                 array2d = create2Darray(*(dim), *(dim+1));
-                printf("Displaying the array : \n");
+                printf("Displaying the 2D Array : \n");
                 displayArr(array2d, *(dim), *(dim+1));\
                 free(dim);
                 break;
@@ -78,9 +78,9 @@ void UI_Statements()
     printf("1) 2D Array\n");
     printf("2) A Circular Linked-List\n");
     printf("3) A Circular Doubly Linked-List\n");
-    printf("4) Clear Screen (For Windows)");
-    printf("5) Clear Screen (For Linux)");
-    printf("6) Exit");
+    printf("4) Clear Screen (For Windows)\n");
+    printf("5) Clear Screen (For Linux)\n");
+    printf("6) Exit\n");
     printf("Enter Choice : ");
 }
 void displayArr(int **array2d, int row, int coloumn)
@@ -190,7 +190,7 @@ void displayDual(struct ClistDual *head, int size)
         }
         else
         {
-            printf("%d->", head->value);
+            printf("%d-><-", head->value);
         }
         head = head->next;
     }
