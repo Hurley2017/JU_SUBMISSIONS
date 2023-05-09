@@ -25,6 +25,7 @@ int killcamDual(struct ClistDual *head, int size);
 void UI_Statements();
 void execute2darray(int **array2d, int row, int coloumn, int start,  int skip);
 void executeClist(struct Clist *head, int size, int start,  int skip);
+void executeClistDual(struct ClistDual *head, int size, int start,  int skip);
 int main()
 {
     int people, count = 0, sw, con = 1, skip, start, survivor;
@@ -49,7 +50,7 @@ int main()
                 displayArr(array2d, *(dim), *(dim+1));
                 printf("Enter the starting point of execution : ");
                 scanf("%d", &start);
-                printf("Skip people : ");
+                printf("How many people to skip every time? : ");
                 scanf("%d", &skip);
                 execute2darray(array2d, *(dim), *(dim+1), start, skip);
                 printf("After all the execution the 2D array looks like this : \n");
@@ -64,7 +65,7 @@ int main()
                 display(head1, people);
                 printf("Enter the starting point of execution : ");
                 scanf("%d", &start);
-                printf("Skip people : ");
+                printf("How many people to skip every time? : ");
                 scanf("%d", &skip);
                 executeClist(head1, people, start, skip);
                 survivor = killcam(head1, people);
@@ -75,6 +76,13 @@ int main()
                 printf("Successfully created Circular Linked-List of such . . .\n");
                 printf("Displaying the Linked-List\n");
                 displayDual(head2, people);
+                printf("Enter the starting point of execution : ");
+                scanf("%d", &start);
+                printf("How many people to skip every time? : ");
+                scanf("%d", &skip);
+                executeClistDual(head2, people, start, skip);
+                survivor = killcamDual(head2, people);
+                printf("%d survives.\n", survivor);
                 break;
             case 4:
                 system("cls");
@@ -98,12 +106,37 @@ void UI_Statements()
     printf("1) 2D Array\n");
     printf("2) A Circular Linked-List\n");
     printf("3) A Circular Doubly Linked-List\n");
+    printf("Additional Options:\n");
+    printf("----------------------\n");
     printf("4) Clear Screen (For Windows)\n");
     printf("5) Clear Screen (For Linux)\n");
     printf("6) Exit\n");
     printf("Enter Choice : ");
 }
 void executeClist(struct Clist *head, int size, int start,  int skip)
+{
+    int people_alive = size;
+    int dynamic_skip = start+skip;
+    while(people_alive>1)
+    {
+        if(head->value != 0)
+        {
+            if(dynamic_skip == 0)
+            {
+                printf("[%d]-executed\n", head->value);
+                head->value = 0;
+                people_alive--;
+                dynamic_skip = skip;
+            }
+            else
+            {
+                dynamic_skip--;
+            }
+        }
+        head = head->next;
+    }
+}
+void executeClistDual(struct ClistDual *head, int size, int start,  int skip)
 {
     int people_alive = size;
     int dynamic_skip = start+skip;
