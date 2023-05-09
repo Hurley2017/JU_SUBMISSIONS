@@ -26,7 +26,7 @@ typedef struct
     {
         if(!isEmpty())
         {
-            return *(data+top);
+            return *(data+top-1);
         }
         printf("Stack Underflow!\n");
         return INT_MAX;
@@ -35,7 +35,7 @@ typedef struct
     {
         if(!isEmpty())
         {
-            return *(data+top--);
+            return *(data+--top);
         }
         printf("Stack Underflow!\n");
         return INT_MAX;
