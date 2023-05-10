@@ -5,51 +5,12 @@ typedef struct
 {
     int *data;
     int top, size;
-    void init(int s)
-    {
-        data = (int*)malloc(sizeof(int)*size);
-        top = 0;
-        size = s;
-    }
-    void push(int element)
-    {
-        if(!isFull())
-        {
-            *(data + top++) = element;
-        }
-        else
-        {
-            printf("Stack Overflow!\n");
-        }
-    }
-    int peek()
-    {
-        if(!isEmpty())
-        {
-            return *(data+top-1);
-        }
-        printf("Stack Underflow!\n");
-        return INT_MAX;
-    }
-    int pop()
-    {
-        if(!isEmpty())
-        {
-            return *(data+--top);
-        }
-        printf("Stack Underflow!\n");
-        return INT_MAX;
-    }
-    int isFull()
-    {
-        return top==size;
-    }
-    int isEmpty()
-    {
-        return top==0;
-    }
 } Stack;
-void display(Stack s);
+void display(Stack *s);
+void init(Stack *s, int size);
+void push(Stack *s, int value);
+int pop(Stack *s);
+int peek(Stack *s);
 void UI_Statements();
 int main()
 {
@@ -64,18 +25,26 @@ int main()
             case 1:
                 printf("Enter the size of the Stack : ");
                 scanf("%d", &size);
-                s1.init(size);
+                init(&s1, size);
                 break;
             case 2:
                 printf("Enter element to be pushed : ");
                 scanf("%d", &element);
-                s1.push(element);
+                push(&s1, element);
                 break;
             case 3:
-                printf("The popped element is %d.\n", s1.pop());
+                int value = pop(&s1);
+                if(value != INT_MAX)
+                {
+                    printf("The popped element is %d.\n", value);
+                }
                 break;
             case 4:
-                printf("The stack top is %d.\n", s1.peek());
+                int value = peek(&s1);
+                if(value != INT_MAX)
+                {
+                    printf("The stack top is %d.\n", value);
+                }
                 break;
             case 5:
                 printf("Displaying the stack :");
@@ -118,4 +87,48 @@ void display(Stack s)
         printf("%d\t", *(s.data+i));
     }
     printf("\n");
+}
+void init(Stack *s, int size)
+{
+    s->data = (int*)malloc(size*sizeof(int));
+    s->size = size;
+    s->top = 0;
+}
+void push(Stack *s, int value)
+{
+    if(s->size == s->top)
+    {
+        printf("Stack Overflow!\n");
+    }
+    else
+    {
+        *(s->data+s->top) = value;
+        s->top++;
+    }
+}
+int pop(Stack *s)
+{
+    if(s->top == 0)
+    {
+        printf("Stack Underflow!\n");
+        return INT_MAX;
+    }
+    else
+    {
+        int t = s->top;
+        s->top--;
+        return *(s->data+t);
+    }
+}
+int peek(Stack *s)
+{
+    if(s->top == 0)
+    {
+        printf("Stack Empty!\n");
+        return INT_MAX;
+    }
+    else
+    {
+        return *(s->data+s->top);
+    }
 }
