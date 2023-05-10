@@ -14,7 +14,7 @@ int peek(Stack *s);
 void UI_Statements();
 int main()
 {
-    int sw, con = 1, element, size;
+    int sw, con = 1, element, size, value0, value1, init_done = 1;
     Stack s1;
     while(con)
     {
@@ -26,29 +26,50 @@ int main()
                 printf("Enter the size of the Stack : ");
                 scanf("%d", &size);
                 init(&s1, size);
+                init_done = 0;
                 break;
             case 2:
+                if(init_done)
+                {
+                    printf("You need to create a stack first!\n");
+                    break;
+                }
                 printf("Enter element to be pushed : ");
                 scanf("%d", &element);
                 push(&s1, element);
                 break;
             case 3:
-                int value = pop(&s1);
-                if(value != INT_MAX)
+                if(init_done)
                 {
-                    printf("The popped element is %d.\n", value);
+                    printf("You need to create a stack first!\n");
+                    break;
+                }
+                value0 = pop(&s1);
+                if(value0 != INT_MAX)
+                {
+                    printf("The popped element is %d.\n", value0);
                 }
                 break;
             case 4:
-                int value = peek(&s1);
-                if(value != INT_MAX)
+                if(init_done)
                 {
-                    printf("The stack top is %d.\n", value);
+                    printf("You need to create a stack first!\n");
+                    break;
+                }
+                value1 = peek(&s1);
+                if(value1 != INT_MAX)
+                {
+                    printf("The stack top is %d.\n", value1);
                 }
                 break;
             case 5:
+                if(init_done)
+                {
+                    printf("You need to create a stack first!\n");
+                    break;
+                }
                 printf("Displaying the stack :");
-                display(s1);
+                display(&s1);
                 break;
             case 6:
                 system("cls");
@@ -80,11 +101,16 @@ void UI_Statements()
     printf("8) Exit\n");
     printf("Enter your choice : ");
 }
-void display(Stack s)
+void display(Stack *s)
 {
-    for(int i=0; i<s.top; i++)
+    if(s->top == 0)
     {
-        printf("%d\t", *(s.data+i));
+        printf("Stack Empty!\n");
+        return;
+    }
+    for(int i=0; i<s->top; i++)
+    {
+        printf("|%d", *(s->data+i));
     }
     printf("\n");
 }
@@ -117,7 +143,7 @@ int pop(Stack *s)
     {
         int t = s->top;
         s->top--;
-        return *(s->data+t);
+        return *(s->data+t-1);
     }
 }
 int peek(Stack *s)
@@ -129,6 +155,6 @@ int peek(Stack *s)
     }
     else
     {
-        return *(s->data+s->top);
+        return *(s->data+s->top-1);
     }
 }
