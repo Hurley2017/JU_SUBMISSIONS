@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-typedef struct Queue
+typedef struct
 {
     int *data, en_point, de_point, size;
 } Queue;
@@ -34,7 +34,7 @@ int Front(Queue q)
 }
 void enQueue(Queue *q, int value)
 {
-    if(q->en_point == q->size-1)
+    if(isFull(*q))
     {
         printf("Queue Full!\n");
     }
@@ -44,7 +44,7 @@ void enQueue(Queue *q, int value)
         *(q->data+q->en_point) = value;
     }
 }
-int deQueue(Queue *q, int value)
+int deQueue(Queue *q)
 {
     if(isEmpty(*q))
     {
@@ -56,7 +56,33 @@ int deQueue(Queue *q, int value)
         return *(q->data + q->de_point++ +1);
     }
 }
+void display(Queue q)
+{
+    if(isEmpty(q))
+    {
+        printf("Queue Empty!\n");
+    }
+    else
+    {
+        for(int i = q.de_point+1; i<=q.en_point; i++)
+        {
+            printf("|%d", *(q.data+i));
+        }
+        printf("\n");
+    }
+}
 int main()
 {
-    
+    Queue q;
+    init(&q, 5);
+    enQueue(&q, 1);
+    enQueue(&q, 1);
+    enQueue(&q, 1);
+    enQueue(&q, 1);
+    enQueue(&q, 1);
+    printf("%d\n", Front(q));
+    printf("%d\n", isEmpty(q));
+    printf("%d\n", isFull(q));
+    display(q);
+    return 0;
 }
