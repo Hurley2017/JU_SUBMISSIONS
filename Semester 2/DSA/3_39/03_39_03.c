@@ -48,11 +48,7 @@ int main()
 }
 int isEmpty(Stack s)
 {
-    if(s.top == 0)
-    {
-        return 1;
-    }
-    return 0;
+    return s.top==0;
 }
 void display(Stack *s)
 {
