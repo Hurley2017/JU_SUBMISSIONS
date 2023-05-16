@@ -14,7 +14,6 @@ void enQueue(Queue *q, int value);
 int deQueue(Queue *q);
 void UI_Statements();
 void takeinp(Queue *q1);
-void reverse(Queue *q1);
 void replace(Queue *q1, int occ, int replace);
 int main()
 {
