@@ -1,83 +1,89 @@
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
-typedef struct Queue_Node
+
+typedef struct Deque_Node
 {
     int data;
-    struct Queue_Node *next, prev;
-} Queue_Node;
-typedef struct Queue
+    struct Deque_Node *next, *prev;
+} Deque_Node;
+
+typedef struct Deque
 {
-    Queue_Node *head, *front, *rear;
-} Queue;
-void display(Queue q);
-void init(Queue *q);
-int Front(Queue q);
-int Rear(Queue q);
-int isEmpty(Queue q);
-void enQueue(Queue *q, int value, int side);
-int deQueue(Queue *q, int side);
-void UI_Statements();
+    Deque_Node *front, *rear;
+} Deque;
+
+void display(Deque q);
+void init(Deque *q);
+int Front(Deque q);
+int Rear(Deque q);
+int isEmpty(Deque q);
+void enQueue(Deque *q, int value, int side);
+int deQueue(Deque *q, int side);
+
 int main()
 {
-    int sw, con = 1, element, size, value0, value1, init_done = 1, e, x;
-    Queue q1;
+    int sw, con = 1, element;
+    Deque q1;
     init(&q1);
     while(con)
     {
-        UI_Statements();
+        printf("\nChoose from the following : \n");
+        printf("1) Enqueue at front\n");
+        printf("2) Enqueue at rear\n");
+        printf("3) Dequeue at front\n");
+        printf("4) Dequeue at rear\n");
+        printf("5) Front\n");
+        printf("6) Rear\n");
+        printf("7) Display the Queue\n");
+        printf("8) Exit\n");
+        printf("Enter your choice : ");
         scanf("%d", &sw);
         switch (sw)
         {
             case 1:
-                printf("Enter element to be pushed at the end : ");
-                scanf("%d", &element);
-                enQueue(&q1, element, 0);
-                break;
-            case 2:
-                value0 = deQueue(&q1, 1);
-                if(value0 != INT_MAX)
-                {
-                    printf("The popped element from the end is %d.\n", value0);
-                }
-                break;
-            case 3:
-                value1 = Front(q1);
-                if(value1 != INT_MAX)
-                {
-                    printf("The Queue Front is %d.\n", value1);
-                }
-                break;
-            case 4:
-                printf("Enter element to be pushed at the first: ");
+                printf("Enter element to be enqueued at front : ");
                 scanf("%d", &element);
                 enQueue(&q1, element, 1);
                 break;
-            case 5:
-                value0 = deQueue(&q1, 0);
-                if(value0 != INT_MAX)
+            case 2:
+                printf("Enter element to be enqueued at rear : ");
+                scanf("%d", &element);
+                enQueue(&q1, element, 0);
+                break;
+            case 3:
+                element = deQueue(&q1, 1);
+                if(element != INT_MAX)
                 {
-                    printf("The popped element from the start is %d.\n", value0);
+                    printf("The dequeued element from front is %d.\n", element);
+                }
+                break;
+            case 4:
+                element = deQueue(&q1, 0);
+                if(element != INT_MAX)
+                {
+                    printf("The dequeued element from rear is %d.\n", element);
+                }
+                break;
+            case 5:
+                element = Front(q1);
+                if(element != INT_MAX)
+                {
+                    printf("The Queue Front is %d.\n", element);
                 }
                 break;
             case 6:
-                value1 = Rear(q1);
-                if(value1 != INT_MAX)
+                element = Rear(q1);
+                if(element != INT_MAX)
                 {
-                    printf("The Queue Rear is %d.\n", value1);
+                    printf("The Queue Rear is %d.\n", element);
                 }
                 break;
             case 7:
-                printf("Displaying the Queue :");
+                printf("Displaying the Queue : ");
                 display(q1);
                 break;
             case 8:
-                system("cls");
-                break;
-            case 9:
-                system("clear");
-                break;
-            case 10:
                 con = 0;
                 printf("Ok\n");
                 break;
@@ -88,80 +94,122 @@ int main()
     }
     return 0;
 }
-void UI_Statements()
-{
-    printf("\nChoose from the following : \n");
-    printf("1) Enque at start\n");
-    printf("2) Deque at start\n");
-    printf("3) Front\n");
-    printf("4) Enque at end\n");
-    printf("5) Deque at end\n");
-    printf("6) Front\n");
-    printf("7) Display the Queue\n");
-    printf("8) Clear Screen (For Windows)\n");
-    printf("9) Clear Screen (For Linux)\n");
-    printf("10) Exit\n");
-    printf("Enter your choice : ");
-}
-void display(Queue q)
+
+void display(Deque q)
 {
     if(isEmpty(q))
     {
-        printf("Queuee Empty.\n");
+        printf("Queue Empty.\n");
+        return;
     }
-    while(q.front->next != NULL)
+    while(q.front != NULL)
     {
         printf("%d|", q.front->data);
         q.front = q.front->next;
     }
 }
-void init(Queue *q)
+
+void init(Deque *q)
 {
-    q->head = (Queue_Node*)malloc(sizeof(Queue_Node));
-    q->front = q->head;
-    q->rear = q->head;
+    q->front = NULL;
+    q->rear = NULL;
 }
-int Front(Queue q)
+
+int Front(Deque q)
 {
     if(isEmpty(q))
-    {
-        printf("Queuee Empty.\n");
-        return INT_MAX;
-    }
-    return q.front->data;
-}
-int Rear(Queue q)
-{
-    if(isEmpty(q))
-    {
-        printf("Queuee Empty.\n");
-        return INT_MAX;
-    }
-    return q.rear->data;
-}
-void enQueue(Queue *q, int value, int side)
-{
-    if(side == 0)
-    {
-        q->rear->data = value;
-        Queue_Node *new = (Queue_Node*)malloc(sizeof(Queue_Node));
-        q->rear->next = new;
-        new->next = NULL;
-        q->rear = new;
-    }
-}
-int deQueue(Queue *q, int side)
-{
-    if(isEmpty(*q))
     {
         printf("Queue Empty.\n");
         return INT_MAX;
     }
-    int value = q->front->data;
-    q->front = q->front->next;
-    return value;
+    return q.front->data;
 }
-int isEmpty(Queue q)
+
+int Rear(Deque q)
 {
-    return q.front == q.rear;
+    if(isEmpty(q))
+    {
+        printf("Queue Empty.\n");
+        return INT_MAX;
+    }
+    return q.rear->data;
+}
+
+void enQueue(Deque *q, int value, int side)
+{
+    Deque_Node *new = (Deque_Node*)malloc(sizeof(Deque_Node));
+    new->data = value;
+
+    if(isEmpty(*q))
+    {
+        new->next = NULL;
+        new->prev = NULL;
+        q->front = new;
+        q->rear = new;
+        return;
+    }
+
+    if(side == 0)
+    {
+        new->next = NULL;
+        new->prev = q->rear;
+
+        q->rear->next = new;
+
+        q->rear = new; 
+    }
+    
+else
+{
+new->prev=NULL; 
+new->next=q->front; 
+q->front->prev=new; 
+q->front=new; 
+}
+}
+int deQueue(Deque *q,int side) 
+{ 
+    if(isEmpty(*q)) 
+    { 
+        printf("Queue Empty.\n"); 
+        return INT_MAX; 
+    }
+    if(side==0) 
+    { 
+        int value=q->rear->data; 
+        if(q->front==q->rear) 
+        { 
+            free(q->rear); 
+            init(q); 
+            return value; 
+        }
+        else
+        {
+            Deque_Node *temp=q->rear; 
+            q->rear=q->rear->prev; 
+            free(temp); 
+            return value; 
+        }
+    }
+    else
+    {
+        int value=q->front->data; 
+        if(q->front==q->rear) 
+        { 
+            free(q->front); 
+            init(q); 
+            return value; 
+        }
+        else
+        {
+            Deque_Node *temp=q->front; 
+            q->front=q->front->next; 
+            free(temp); 
+            return value; 
+        }
+    }
+}
+int isEmpty(Deque q) 
+{ 
+    return (q.front==NULL && q.rear==NULL); 
 }
