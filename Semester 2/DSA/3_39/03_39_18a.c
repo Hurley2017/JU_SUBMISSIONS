@@ -110,7 +110,7 @@ void pShort(Stack *s)
     {
         for(int j=i; j<s->top; j++)
         {
-            if(*(s->priority+i)>*(s->priority+j))
+            if(*(s->priority+i)<*(s->priority+j))
             {
                 int temp = *(s->priority+i);
                 *(s->priority+i) = *(s->priority+j);
