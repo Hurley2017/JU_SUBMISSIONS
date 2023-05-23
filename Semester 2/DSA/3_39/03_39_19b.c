@@ -1,16 +1,19 @@
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
-typedef struct Queue_Node
-{
-    int data;
-    int priority;
-    struct Queue_Node *next;
+
+// a structure to represent an element in the priority queue
+typedef struct Queue_Node {
+    int data; // the data value
+    int priority; // the priority value
+    struct Queue_Node *next; // the pointer to the next node
 } Queue_Node;
-typedef struct Queue
-{
-    Queue_Node *front;
+
+// a structure to represent the priority queue
+typedef struct Queue {
+    Queue_Node *front; // the pointer to the front node
 } Queue;
+
 void display(Queue q);
 void init(Queue *q);
 int Front(Queue q);
@@ -18,17 +21,15 @@ int isEmpty(Queue q);
 void enQueue(Queue *q, int data, int priority);
 int deQueue(Queue *q);
 void UI_Statements();
-int main()
-{
+
+int main() {
     int sw, con = 1, element, size, value0, value1, init_done = 1, e, x;
     Queue q1;
     init(&q1);
-    while (con)
-    {
+    while (con) {
         UI_Statements();
         scanf("%d", &sw);
-        switch (sw)
-        {
+        switch (sw) {
             case 1:
                 printf("Enter data and priority: ");
                 scanf("%d %d", &element, &x);
@@ -36,15 +37,13 @@ int main()
                 break;
             case 2:
                 value0 = deQueue(&q1);
-                if (value0 != INT_MAX)
-                {
+                if (value0 != INT_MAX) {
                     printf("The dequeued element is %d.\n", value0);
                 }
                 break;
             case 3:
                 value1 = Front(q1);
-                if (value1 != INT_MAX)
-                {
+                if (value1 != INT_MAX) {
                     printf("The queue front is %d.\n", value1);
                 }
                 break;
@@ -70,8 +69,7 @@ int main()
     return 0;
 }
 
-void UI_Statements()
-{
+void UI_Statements() {
     printf("\nChoose from the following : \n");
     printf("1) Enqueue\n");
     printf("2) Dequeue\n");
@@ -82,67 +80,75 @@ void UI_Statements()
     printf("7) Exit\n");
     printf("Enter your choice : ");
 }
-void display(Queue q)
-{
-    if (isEmpty(q))
-     {
+
+void display(Queue q) {
+    if (isEmpty(q)) {
         printf("Queue empty.\n");
     }
-    while (q.front != NULL)
-    {
+    while (q.front != NULL) {
         printf("%d|", q.front->data);
         q.front = q.front->next;
     }
 }
-void init(Queue *q)
-{
+
+void init(Queue *q) {
     q->front = NULL;
 }
-int Front(Queue q)
-{
-    if (isEmpty(q))
-    {
+
+int Front(Queue q) {
+    if (isEmpty(q)) {
         printf("Queue empty.\n");
         return INT_MAX;
     }
     return q.front->data;
 }
-void enQueue(Queue *q, int data, int priority)
-{
+
+void enQueue(Queue *q, int data, int priority) {
+    // create a new node with given data and priority
     Queue_Node *new = (Queue_Node*)malloc(sizeof(Queue_Node));
     new->data = data;
     new->priority = priority;
-    Queue_Node *prev = NULL;
-    Queue_Node *curr = q->front;
-    while (curr != NULL && curr->priority > priority)
-    {
+    
+     // find the position to insert the node based on its priority
+     Queue_Node *prev = NULL; // the previous node
+     Queue_Node *curr = q->front; // the current node
+     
+     while (curr != NULL && curr->priority > priority) {
+         // move to the next node with higher priority
          prev = curr;
          curr = curr->next;
-    }
-    new->next = curr;     
-    if (prev == NULL)
-    {
-        q->front = new;
-    }
-    else
-    {
-        prev->next = new;
-    }
+     }
+     
+     // insert the node at the correct position
+     new->next = curr; // link the new node to the next node
+     
+     if (prev == NULL) {
+         // insert at the front of the queue
+         q->front = new;
+     } else {
+         // insert after the previous node
+         prev->next = new;
+     }
 }
-int deQueue(Queue *q)
-{
-    if(isEmpty(*q))
-    {
+
+int deQueue(Queue *q) {
+    if (isEmpty(*q)) {
         printf("Queue empty.\n");
         return INT_MAX;
     }
-    int value = q->front->data;
-    Queue_Node *temp = q->front;
-    q->front = q->front->next;
-    free(temp);
-    return value;
+    
+     // store the data of the front node
+     int value = q->front->data;
+     
+     // remove the front node from the queue and free its memory
+     Queue_Node *temp = q->front; // temporary pointer to the front node
+     q->front = q->front->next; // move the front pointer to the next node
+     free(temp); // free the memory allocated for the removed node
+     
+     // return the data of the removed node
+     return value;
 }
-int isEmpty(Queue q)
-{
+
+int isEmpty(Queue q) {
     return q.front == NULL;
 }
