@@ -17,7 +17,6 @@ while save2 != None:
     except:
         print("Odd printing stopped!\n")
         break
-
 print("Printing even  : ")
 while save1 != None:
     print(save1)
@@ -29,4 +28,23 @@ while save1 != None:
         break
 #using compress
 print("Using Compress : \n")
-top10 = [1]*20
+top10 = []
+even_bool = []
+odd_bool = []
+for i in range(1, 21):
+    if(i%2 == 0):
+        even_bool.append(True)
+        odd_bool.append(False)
+    else:
+        even_bool.append(False)
+        odd_bool.append(True)
+    top10.append(i)
+odd_data = compress(top10, odd_bool)
+even_data = compress(top10, even_bool)
+print("Printing even data : ")
+for data in odd_data:
+    print(data)
+print("printing odd data : ")
+for data in even_data:
+    print(data)
+print("Ended!\n")
