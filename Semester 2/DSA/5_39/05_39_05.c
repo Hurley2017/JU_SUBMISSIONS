@@ -1,6 +1,3 @@
-// Write a menu-driven program to implement the following sorting
-// techniques using an array (recursive functions)
-// (a) Quick sort (b) Merge sort
 #include <stdio.h>  
 #include <stdlib.h>
 void createArray(int *array, int size)
