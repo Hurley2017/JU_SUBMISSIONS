@@ -1,6 +1,3 @@
-// Write a menu-driven program to implement the following sorting
-// techniques using an array
-// (a) Bubble sort (b) Insertion sort (c) Selection sort
 #include <stdio.h>
 #include <stdlib.h>
 void createArray(int *array, int size)

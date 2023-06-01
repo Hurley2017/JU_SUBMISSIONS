@@ -5,10 +5,10 @@ struct node
     int data;
     struct node *next;
 };
-void createList(struct node *head, int size)
+struct node *createList(int size)
 {
-    struct node *newnode = head, *temp;
-    for(int i=0; i<size; i++)
+    struct node *head = 0, *newnode, *temp;
+    for (int i = 0; i < size; i++)
     {
         newnode = (struct node *)malloc(sizeof(struct node));
         printf("Enter the data: ");
@@ -24,6 +24,7 @@ void createList(struct node *head, int size)
             temp = newnode;
         }
     }
+    return head;
 }
 void display(struct node *head)
 {
@@ -64,7 +65,7 @@ int Selection_Sort(struct node *head)
 {
     struct node *temp = head;
     int i, j, size = 0, temp_data, min;
-    while (temp != 0)
+    while (temp != NULL)
     {
         size++;
         temp = temp->next;
@@ -72,18 +73,24 @@ int Selection_Sort(struct node *head)
     for (i = 0; i < size - 1; i++)
     {
         temp = head;
-        min = i;
-        for (j = i; j < size; j++)
+        min = i;   
+        for (j = i + 1; j < size; j++)
         {
-            if (temp->data < temp->next->data)
+            if (temp->data > temp->next->data)
             {
                 min = j;
             }
             temp = temp->next;
         }
-        temp_data = temp->data;
-        temp->data = temp->next->data;
-        temp->next->data = temp_data;
+        temp = head;
+        for (j = 0; j < min; j++)
+        {
+            temp = temp->next;
+        }
+        temp_data = head->data;
+        head->data = temp->data;
+        temp->data = temp_data;
+        head = head->next;
     }
     return 0;
 }
@@ -114,11 +121,10 @@ int Insertion_Sort(struct node *head)
 }
 int main()
 {
-    struct node *head = 0;
     int size, sw, status;
     printf("Enter the size of the list: ");
     scanf("%d", &size);
-    createList(head, size);
+    struct node *head = createList(size);
     while (1)
     {
         printf("Choose from the following: \n");
