@@ -1,4 +1,4 @@
-#include <stdio.h>  
+#include <stdio.h>
 #include <stdlib.h>
 void createArray(int *array, int size)
 {
@@ -19,100 +19,124 @@ void display(int *array, int size)
     }
     printf("\n");
 }
-//does not work seg fault
-void Quick_Sort(int *array, int size)
+void Quick_Sort(int *array, int start, int end)
 {
-    int pivot = array[size - 1], i = -1, j, temp;
-    if (size == 1)
+    if (start >= end)
     {
         return;
     }
-    for (j = 0; j < size - 1; j++)
+    int pivot = array[end];
+    int i = start - 1;
+    for (int j = start; j < end; j++)
     {
         if (array[j] < pivot)
         {
             i++;
-            temp = array[i];
+            int temp = array[i];
             array[i] = array[j];
             array[j] = temp;
         }
     }
-    temp = array[i + 1];
-    array[i + 1] = array[size - 1];
-    array[size - 1] = temp;
-    Quick_Sort(array, i + 1);
-    Quick_Sort(array + i + 2, size - i - 2);
+    int temp = array[i + 1];
+    array[i + 1] = array[end];
+    array[end] = temp;
+    Quick_Sort(array, start, i);
+    Quick_Sort(array, i + 2, end);
 }
-void Merge_Sort(int *array, int size)
+void Merge(int *array, int left, int mid, int right)
 {
-    int i, j, k, mid = size / 2, *temp = (int *)malloc(size * sizeof(int));
-    if (size == 1)
+    int i, j, k;
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    int *leftArray = (int *)malloc(n1 * sizeof(int));
+    int *rightArray = (int *)malloc(n2 * sizeof(int));
+    for (i = 0; i < n1; i++)
     {
-        return;
+        leftArray[i] = array[left + i];
     }
-    Merge_Sort(array, mid);
-    Merge_Sort(array + mid, size - mid);
-    for (i = 0, j = mid, k = 0; i < mid && j < size;)
+    for (j = 0; j < n2; j++)
     {
-        if (array[i] < array[j])
+        rightArray[j] = array[mid + 1 + j];
+    }
+    i = 0;
+    j = 0;
+    k = left;
+    while (i < n1 && j < n2)
+    {
+        if (leftArray[i] <= rightArray[j])
         {
-            temp[k++] = array[i++];
+            array[k] = leftArray[i];
+            i++;
         }
         else
         {
-            temp[k++] = array[j++];
+            array[k] = rightArray[j];
+            j++;
         }
+        k++;
     }
-    while (i < mid)
+    while (i < n1)
     {
-        temp[k++] = array[i++];
+        array[k] = leftArray[i];
+        i++;
+        k++;
     }
-    while (j < size)
+    while (j < n2)
     {
-        temp[k++] = array[j++];
+        array[k] = rightArray[j];
+        j++;
+        k++;
     }
-    for (i = 0; i < size; i++)
+    free(leftArray);
+    free(rightArray);
+}
+void Merge_Sort(int *array, int left, int right)
+{
+    if (left < right)
     {
-        array[i] = temp[i];
+        int mid = left + (right - left) / 2;
+        Merge_Sort(array, left, mid);
+        Merge_Sort(array, mid + 1, right);
+        Merge(array, left, mid, right);
     }
-    free(temp);
 }
 int main()
 {
     int size, *array, sw, status;
     printf("Enter the size of the array: ");
-    scanf("%d", &size); 
+    scanf("%d", &size);
     array = (int *)malloc(size * sizeof(int));
     createArray(array, size);
-    while(1)
+    while (1)
     {
-        printf("Enter the type of search: \n");
-        printf("1. Quick_Sort\n");
-        printf("2. Merge_Sort\n");
+        printf("Enter the type of sort: \n");
+        printf("1. Quick Sort\n");
+        printf("2. Merge Sort\n");
         printf("3. Display the array\n");
         printf("4. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &sw);
-        switch(sw)
+        switch (sw)
         {
-            case 1:
-                printf("Quick Sort\n");
-                Quick_Sort(array, size);
-                printf("Done\n");
-                break;
-            case 2:
-                printf("Merge Sort\n");
-                Merge_Sort(array, size);
-                printf("Done\n");
-                break;
-            case 3:
-                display(array, size);
-                break;
-            case 4:
-                printf("Exiting...\n");
-                return 0;
-            default:
-                break;
+        case 1:
+            printf("Quick Sort\n");
+            Quick_Sort(array, 0, size - 1);
+            printf("Done\n");
+            break;
+        case 2:
+            printf("Merge Sort\n");
+            Merge_Sort(array, 0, size - 1);
+            printf("Done\n");
+            break;
+        case 3:
+            display(array, size);
+            break;
+        case 4:
+            printf("Exiting...\n");
+            free(array);
+            return 0;
+        default:
+            break;
         }
     }
 }
