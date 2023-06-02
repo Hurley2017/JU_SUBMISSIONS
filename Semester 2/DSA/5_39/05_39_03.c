@@ -115,7 +115,6 @@ void Insertion_Sort(struct node** head_ptr)
     }
     *head_ptr = sorted;
 }
-
 int main()
 {
     int size, sw, status;

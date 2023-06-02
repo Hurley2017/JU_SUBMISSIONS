@@ -3,18 +3,20 @@
 struct node
 {
     int data;
-    struct node *next;
+    struct node* next;
 };
-struct node *createList(int size)
+struct node* createList(int size)
 {
-    struct node *head = 0, *newnode, *temp;
+    struct node* head = NULL;
+    struct node* newnode;
+    struct node* temp;
     for (int i = 0; i < size; i++)
     {
-        newnode = (struct node *)malloc(sizeof(struct node));
+        newnode = (struct node*)malloc(sizeof(struct node));
         printf("Enter the data: ");
         scanf("%d", &newnode->data);
-        newnode->next = 0;
-        if (head == 0)
+        newnode->next = NULL;
+        if (head == NULL)
         {
             head = temp = newnode;
         }
@@ -26,27 +28,26 @@ struct node *createList(int size)
     }
     return head;
 }
-void display(struct node *head)
+void display(struct node* head)
 {
-    struct node *temp = head;
-    while (temp != 0)
+    struct node* temp = head;
+    while (temp != NULL)
     {
         printf("%d ", temp->data);
         temp = temp->next;
     }
     printf("\n");
 }
-//infinite loop
-int Bubble_Sort(struct node** head_ref)
+void Bubble_Sort(struct node** head_ref)
 {
     if (*head_ref == NULL || (*head_ref)->next == NULL)
     {
-        return 1;
+        return;
     }
     int swapped;
     struct node* current;
     struct node* last = NULL;
-    while (1)
+    do
     {
         swapped = 0;
         current = *head_ref;
@@ -67,71 +68,50 @@ int Bubble_Sort(struct node** head_ref)
                     }
                     prev->next = current->next;
                 }
-                current->next = current->next->next;
+                struct node* nextNode = current->next->next;
                 current->next->next = current;
+                current->next = nextNode;
                 swapped = 1;
             }
             current = current->next;
         }
         last = current;
-        if (!swapped)
-        {
-            break;
-        }
     }
-    return 0;
+    while (swapped);
 }
-//infinite loop
-int Selection_Sort(struct node** head_ref)
+void Selection_Sort(struct node** head_ref)
 {
     if (*head_ref == NULL || (*head_ref)->next == NULL)
     {
-        return 1;
+        return;
     }
-    struct node* current;
-    struct node* min;
-    struct node* prev;
-    struct node* min_prev;
-    current = *head_ref;
-    while (current->next != NULL)
+    struct node* current = *head_ref;
+    while (current != NULL)
     {
-        min = current;
-        prev = current;
-        min_prev = prev;
+        struct node* min = current;
         struct node* temp = current->next;
         while (temp != NULL)
         {
-            if(temp->data < min->data)
+            if (temp->data < min->data)
             {
                 min = temp;
-                min_prev = prev;
             }
-            prev = temp;
             temp = temp->next;
         }
-        if(current != min)
+        if (min != current) 
         {
-            if(current == *head_ref)
-            {
-                *head_ref = min;
-            }
-            else
-            {
-                min_prev->next = current;
-            }
-            prev->next = current;
-            struct node* temp_next = current->next;
-            current->next = min->next;
-            min->next = temp_next;
+            int tempData = current->data;
+            current->data = min->data;
+            min->data = tempData;
         }
         current = current->next;
     }
-    return 0;
 }
-int Insertion_Sort(struct node** head_ref) {
+void Insertion_Sort(struct node** head_ref)
+{
     if (*head_ref == NULL || (*head_ref)->next == NULL)
     {
-        return 1;
+        return;
     }
     struct node* sorted = NULL;
     struct node* current = *head_ref;
@@ -146,7 +126,7 @@ int Insertion_Sort(struct node** head_ref) {
         else
         {
             struct node* temp = sorted;
-            while(temp->next != NULL && current->data >= temp->next->data)
+            while (temp->next != NULL && current->data >= temp->next->data)
             {
                 temp = temp->next;
             }
@@ -156,14 +136,13 @@ int Insertion_Sort(struct node** head_ref) {
         current = next;
     }
     *head_ref = sorted;
-    return 0;
 }
 int main()
 {
     int size, sw, status;
     printf("Enter the size of the list: ");
     scanf("%d", &size);
-    struct node *head = createList(size);
+    struct node* head = createList(size);
     while (1)
     {
         printf("Choose from the following: \n");
@@ -171,31 +150,19 @@ int main()
         printf("2. Insertion Sort\n");
         printf("3. Selection Sort\n");
         printf("4. Display\n");
-        perror("5. Exit\n");
+        printf("5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &sw);
         switch (sw)
         {
             case 1:
-                status = Bubble_Sort(&head);
-                if (status != 0)
-                {
-                    printf("Error Occured!\n");
-                }
+                Bubble_Sort(&head);
                 break;
             case 2:
-                status = Insertion_Sort(&head);
-                if (status != 0)
-                {
-                    printf("Error Occured!\n");
-                }
+                Insertion_Sort(&head);
                 break;
             case 3:
-                status = Selection_Sort(&head);
-                if (status != 0)
-                {
-                    printf("Error Occured!\n");
-                }
+                Selection_Sort(&head);
                 break;
             case 4:
                 display(head);
