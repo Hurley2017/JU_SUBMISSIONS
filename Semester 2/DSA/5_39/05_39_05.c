@@ -19,6 +19,7 @@ void display(int *array, int size)
     }
     printf("\n");
 }
+//does not work seg fault
 void Quick_Sort(int *array, int size)
 {
     int pivot = array[size - 1], i = -1, j, temp;
@@ -103,6 +104,7 @@ int main()
                 printf("Merge Sort\n");
                 Merge_Sort(array, size);
                 printf("Done\n");
+                break;
             case 3:
                 display(array, size);
                 break;

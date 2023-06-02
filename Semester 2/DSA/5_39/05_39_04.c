@@ -36,6 +36,7 @@ void display(struct node *head)
     }
     printf("\n");
 }
+//infinite loop
 int Bubble_Sort(struct node** head_ref)
 {
     if (*head_ref == NULL || (*head_ref)->next == NULL)
@@ -80,6 +81,7 @@ int Bubble_Sort(struct node** head_ref)
     }
     return 0;
 }
+//infinite loop
 int Selection_Sort(struct node** head_ref)
 {
     if (*head_ref == NULL || (*head_ref)->next == NULL)
