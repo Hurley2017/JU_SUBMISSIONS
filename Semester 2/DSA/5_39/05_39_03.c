@@ -34,7 +34,7 @@ void display(struct node* head)
 
     while (temp != NULL)
     {
-        printf("%d ", temp->data);
+        printf("%d->", temp->data);
         temp = temp->next;
     }
 
@@ -135,14 +135,18 @@ int main()
         {
             case 1:
                 Bubble_Sort(head);
+                printf("Done\n");
                 break;
             case 2:
                 Insertion_Sort(&head);
+                printf("Done\n");
                 break;
             case 3:
                 Selection_Sort(head);
+                printf("Done\n");
                 break;
             case 4:
+                printf("The list is: ");
                 display(head);
                 break;
             case 5:

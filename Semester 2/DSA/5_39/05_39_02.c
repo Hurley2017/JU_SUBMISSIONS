@@ -96,12 +96,20 @@ int main()
                 {
                     printf("Error Occured!\n");
                 }
+                else
+                {
+                    printf("Sorted!\n");
+                }
                 break;
             case 2:
                 status = Insertion_Sort(array, size);
                 if (status != 0)
                 {
                     printf("Error Occured!\n");
+                }
+                else
+                {
+                    printf("Sorted!\n");
                 }
                 break;
             case 3:
@@ -110,14 +118,20 @@ int main()
                 {
                     printf("Error Occured!\n");
                 }
+                else
+                {
+                    printf("Sorted!\n");
+                }
                 break;
             case 4:
+                printf("The array is: ");
                 display(array, size);
                 break;
             case 5:
                 printf("Exiting...\n");
                 return 0;
             default:
+                printf("Invalid choice! Please try again.\n");
                 break;
         }
     }

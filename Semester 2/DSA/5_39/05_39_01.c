@@ -91,12 +91,14 @@ int main()
                     printf("Key found at index %d\n", status);
                 break;
             case 3:
+                printf("The array is : ");
                 display(array, size);
                 break;
             case 4:
                 printf("Exiting...\n");
                 return 0;
             default:
+                printf("Invalid choice! Please try again.\n");
                 break;
         }
     }

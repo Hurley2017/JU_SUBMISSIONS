@@ -156,21 +156,29 @@ int main()
         switch (sw)
         {
             case 1:
+                printf("Bubble Sort : \n");
                 Bubble_Sort(&head);
+                printf("Done\n");
                 break;
             case 2:
+                printf("Insertion Sort : \n");
                 Insertion_Sort(&head);
+                printf("Done\n");
                 break;
             case 3:
+                printf("Selection Sort : \n");
                 Selection_Sort(&head);
+                printf("Done\n");
                 break;
             case 4:
+                printf("The list is: ");
                 display(head);
                 break;
             case 5:
                 printf("Exiting...\n");
                 return 0;
             default:
+                printf("Invalid choice! Please try again.\n");
                 break;
         }
     }

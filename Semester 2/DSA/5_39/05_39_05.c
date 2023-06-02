@@ -129,6 +129,7 @@ int main()
             printf("Done\n");
             break;
         case 3:
+            printf("The array is : ");
             display(array, size);
             break;
         case 4:
@@ -136,6 +137,7 @@ int main()
             free(array);
             return 0;
         default:
+            printf("Invalid choice! Please try again.\n");
             break;
         }
     }
