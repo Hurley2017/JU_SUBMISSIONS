@@ -1,5 +1,4 @@
 #! bin/bash
-#! bin/bash
 echo "Enter 5 digit number : "
 read number
 if [ $number -gt 10000 ] 
