@@ -89,11 +89,10 @@ void Selection_Sort(struct node* head)
         start = start->next;
     }
 }
-//does not work
-void Insertion_Sort(struct node* head)
+void Insertion_Sort(struct node** head_ptr)
 {
     struct node* sorted = NULL;
-    struct node* current = head;
+    struct node* current = *head_ptr;
     while (current != NULL)
     {
         struct node* nextNode = current->next;
@@ -114,8 +113,9 @@ void Insertion_Sort(struct node* head)
         }
         current = nextNode;
     }
-    head = sorted;
+    *head_ptr = sorted;
 }
+
 int main()
 {
     int size, sw, status;
@@ -138,7 +138,7 @@ int main()
                 Bubble_Sort(head);
                 break;
             case 2:
-                Insertion_Sort(head);
+                Insertion_Sort(&head);
                 break;
             case 3:
                 Selection_Sort(head);
