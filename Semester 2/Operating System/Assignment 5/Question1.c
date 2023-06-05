@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include <sys/shm.h>
 #include <sys/wait.h>
-#include <sys/types.h>
 int shmid;
 struct data
 {
