@@ -37,9 +37,9 @@ struct data compute(int *arr)
 }
 void display(struct data d)
 {
-    printf("Maximum: %d\n", d.max);
-    printf("Minimum: %d\n", d.min);
-    printf("Average: %f\n", d.avg);
+    printf("Max: %d\n", d.max);
+    printf("Min: %d\n", d.min);
+    printf("Avg: %f\n", d.avg);
 }
 void displayArray(int *arr)
 {
