@@ -2,6 +2,7 @@ echo "Start : "
 data=$(<index.txt)
 IFS=$'\n'
 read -rd '' -a lines <<< "$data"
+echo "${lines[@]}"
 for line in "${lines[@]}"
 do
     sum=0
