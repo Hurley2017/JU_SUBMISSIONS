@@ -1,7 +1,7 @@
 #! bin/bash
 echo "Start : "
 temps=$(ls *~)
-# echo $temps
+echo $temps
 IFS=$'\n'
 read -rd '' -a temp <<< "$temps"
 # echo ${temp[@]}
