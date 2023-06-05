@@ -108,7 +108,7 @@ void createChildProcess()
         int *arr = attachSharedMemory();
         for (int i = 0; i < 100; i++)
         {
-            arr[i] = generateRandomNumber();
+            *(arr+i) = generateRandomNumber();
         }
         printf("Displaying the generated array!\n");
         displayArray(arr);
