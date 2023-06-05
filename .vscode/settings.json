@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "03_39_01.C": "cpp"
+        "03_39_01.C": "cpp",
+        "types.h": "c"
     }
 }

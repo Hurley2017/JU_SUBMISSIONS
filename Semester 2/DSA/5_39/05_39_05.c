@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+void print_Hello()
+{
+    printf("Hello\n");
+}   
 void createArray(int *array, int size)
 {
     int i;
