@@ -13,7 +13,7 @@ struct data
 };
 int generateRandomNumber()
 {
-    return rand() % 100;
+    return rand() % 500;
 }
 struct data compute(int *arr)
 {
