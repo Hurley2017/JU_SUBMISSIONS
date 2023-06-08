@@ -1,4 +1,3 @@
-#Assignment3 - Question1
 import math
 def isPrime(number):
     for i in range(2, math.floor(math.sqrt(number))+1):
