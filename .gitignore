@@ -34,3 +34,4 @@
 .vscode
 deep
 try
+*.class
