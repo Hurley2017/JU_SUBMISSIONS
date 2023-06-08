@@ -1,16 +1,8 @@
 import java.util.Scanner;
-interface Properties 
-{
-    public void add_book();
-    public void search_book();
-    public void view_all_book();
-    public void add_member();
-    public void search_member();
-    public void view_all_member();
-    public void issued_book();
-    public void return_book();
-}
-class Main implements Properties
+import libsys.Booklist.Booklist;
+import libsys.Memberlist.Memberlist;
+import libsys.Transaction.Transaction;
+class Main
 {
     public static void main(String[] Tusher)
     {
@@ -110,7 +102,7 @@ class Main implements Properties
                     buffer.next();
                     member_name = buffer.nextLine();
                     members[member_count-1].setData(m_id, member_name);
-                    System.out.println("member successfully added!");
+                    System.out.println("Member successfully added!");
                     member_count++;
                     break;
                 case 6:
@@ -284,165 +276,5 @@ class Main implements Properties
         System.out.println("10) View all transaction");
         System.out.println("11) Exit");
         System.out.print("Enter your choice : ");
-    }
-    public void add_book()
-    {
-        Scanner buffer = new Scanner(System.in);
-        int id, number;
-        String book_name;
-        System.out.print("Enter book id :");
-        id = buffer.nextInt();
-        System.out.print("Total number to be added : ");
-        number = buffer.nextInt();
-        System.out.print("Name : ");
-        buffer.next();
-        book_name = buffer.nextLine();
-        books[book_count-1].setData(id, number, book_name);
-        System.out.println("Book successfully added!");
-        book_count++;
-        break;
-    }
-    public void search_book()
-    {
-
-    }
-    public void view_all_book()
-    {
-
-    }
-    public void add_member()
-    {
-
-    }
-    public void search_member()
-    {
-
-    }
-    public void view_all_member()
-    {
-
-    }
-    public void issued_book()
-    {
-
-    }
-    public void return_book()
-    {
-
-    }
-}
-class Booklist
-{
-    int available, purchased, book_id;
-    String name;
-    int ret_id()
-    {
-        return book_id;
-    }
-    void setData(int book_id, int available, String name)
-    {
-        this.book_id = book_id;
-        this.available = available;
-        this.name = name;
-        purchased = 0;        
-    }
-    void getData()
-    {
-        System.out.println("Book information :");
-        System.out.println("------------------------");
-        System.out.println("Book name : "+name+".");
-        System.out.println("Book ID : "+book_id+".");
-        System.out.println("Available : "+available+".");
-        System.out.println("Purchased : "+purchased+".");
-    }
-    boolean purchase()
-    {
-        if(available - 1 >= 0)
-        {
-            purchased++;
-            available--;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    void increase(int incoming)
-    {
-        available = available + incoming;
-    }
-    void return_book()
-    {
-        available++;
-        purchased--;
-    }
-}
-class Memberlist
-{
-    int member_id, issued_number_of_books, max_issued_books;
-    String name;
-    void setData(int member_id, String name)
-    {
-        this.name = name;
-        this.member_id = member_id;
-        issued_number_of_books = 0;
-        max_issued_books = 20;
-    }
-    void getData()
-    {
-        System.out.println("Member information :");
-        System.out.println("------------------------");
-        System.out.println("Member name : "+name+".");
-        System.out.println("Member ID : "+member_id+".");
-        System.out.println("Number of issued books : "+issued_number_of_books+".");
-        System.out.println("Max issued books : "+max_issued_books+".");   
-    }
-    int ret_id()
-    {
-        return member_id;
-    }
-    boolean request_book()
-    {
-        if(issued_number_of_books+1 <= max_issued_books)
-        {
-            issued_number_of_books++;
-            return true;
-        }
-        return false;
-    }
-    boolean return_book()
-    {
-        if(issued_number_of_books == 0)
-        {
-            return false;
-        }
-        else
-        {
-            issued_number_of_books--;
-            return true;
-        }
-    }
-}
-class Transaction
-{
-    int book_id;
-    String member_id;
-    void setData(int member_id, int book_id)
-    {
-        this.member_id = String.valueOf(member_id);
-        this.book_id = book_id;
-    }
-    int getMemberId()
-    {
-        return Integer.valueOf(member_id);
-    }
-    int getBookId()
-    {
-        return book_id;
-    }
-    void changeMember()
-    {
-        this.member_id = "xxxx";
     }
 }
