@@ -5,6 +5,8 @@ struct node
     int data;
     struct node* next;
 };
+
+
 struct node* createList(int size)
 {
     struct node* head = NULL;
@@ -57,7 +59,6 @@ void Bubble_Sort(struct node* head)
         {
             if (ptr->data > ptr->next->data)
             {
-                // Swap nodes
                 int temp = ptr->data;
                 ptr->data = ptr->next->data;
                 ptr->next->data = temp;

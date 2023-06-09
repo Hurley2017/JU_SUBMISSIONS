@@ -1,148 +1,140 @@
 #include <stdio.h>
 #include <stdlib.h>
-void print_Hello()
+
+void UI_Statements();
+int* createArray(int size);
+void Quick_Sort(int arr[], int low, int high);
+int Partition(int arr[], int low, int high);
+void Merge_Sort(int arr[], int low, int high);
+void Merge(int arr[], int low, int mid, int high);
+void display(int arr[], int size);
+
+int main()
 {
-    printf("Hello\n");
-}   
-void createArray(int *array, int size)
-{
-    int i;
-    for (i = 0; i < size; i++)
+    int *arr, size;
+    printf("Enter the size of the array: ");
+    scanf("%d", &size);
+    arr = createArray(size);
+    int choice;
+    while(1)
     {
-        printf("Element %d: ", i + 1);
-        scanf("%d", &array[i]);
-    }
-    printf("Done\n");
-}
-void display(int *array, int size)
-{
-    int i;
-    for (i = 0; i < size; i++)
-    {
-        printf("%d ", array[i]);
-    }
-    printf("\n");
-}
-void Quick_Sort(int *array, int start, int end)
-{
-    if (start >= end)
-    {
-        return;
-    }
-    int pivot = array[end];
-    int i = start - 1;
-    for (int j = start; j < end; j++)
-    {
-        if (array[j] < pivot)
+        UI_Statements();
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice)
         {
-            i++;
-            int temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
+        case 1:
+            Quick_Sort(arr, 0, size - 1);
+            printf("The sorted array is: ");
+            display(arr, size);
+            break;
+        case 2:
+            Merge_Sort(arr, 0, size - 1);
+            printf("The sorted array is: ");
+            display(arr, size);
+            break;
+        case 3:
+            printf("Bye\n");
+            exit(0);
+            break;
+        default:
+            printf("Invalid choice!");
+            break;
         }
     }
-    int temp = array[i + 1];
-    array[i + 1] = array[end];
-    array[end] = temp;
-    Quick_Sort(array, start, i);
-    Quick_Sort(array, i + 2, end);
+    return 0;
 }
-void Merge(int *array, int left, int mid, int right)
+
+void UI_Statements()
 {
-    int i, j, k;
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
-    int *leftArray = (int *)malloc(n1 * sizeof(int));
-    int *rightArray = (int *)malloc(n2 * sizeof(int));
-    for (i = 0; i < n1; i++)
+    printf("\n1. Quick Sort\n");
+    printf("2. Merge Sort\n");
+    printf("3. Exit\n");
+}
+
+int* createArray(int size)
+{
+    int *arr;
+    arr = (int*)malloc(size * sizeof(int));
+    for(int i = 0; i < size; i++)
     {
-        leftArray[i] = array[left + i];
+        printf("Enter the elements : ");
+        scanf("%d", &arr[i]);   
     }
-    for (j = 0; j < n2; j++)
+    return arr;
+}   
+
+void Quick_Sort(int arr[], int low, int high)
+{
+    if(low < high)
     {
-        rightArray[j] = array[mid + 1 + j];
+        int pivot = Partition(arr, low, high);
+        Quick_Sort(arr, low, pivot - 1);
+        Quick_Sort(arr, pivot + 1, high);
     }
-    i = 0;
-    j = 0;
-    k = left;
-    while (i < n1 && j < n2)
+}
+
+int Partition(int arr[], int low, int high)
+{
+    int pivot = arr[low];
+    int i = low + 1;
+    int j = high;
+    while(1)
     {
-        if (leftArray[i] <= rightArray[j])
-        {
-            array[k] = leftArray[i];
+        while(arr[i] <= pivot && i <= high)
             i++;
+        while(arr[j] > pivot && j >= low)
+            j--;
+        if(i < j)
+        {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
         else
         {
-            array[k] = rightArray[j];
-            j++;
-        }
-        k++;
-    }
-    while (i < n1)
-    {
-        array[k] = leftArray[i];
-        i++;
-        k++;
-    }
-    while (j < n2)
-    {
-        array[k] = rightArray[j];
-        j++;
-        k++;
-    }
-    free(leftArray);
-    free(rightArray);
-}
-void Merge_Sort(int *array, int left, int right)
-{
-    if (left < right)
-    {
-        int mid = left + (right - left) / 2;
-        Merge_Sort(array, left, mid);
-        Merge_Sort(array, mid + 1, right);
-        Merge(array, left, mid, right);
-    }
-}
-int main()
-{
-    int size, *array, sw, status;
-    printf("Enter the size of the array: ");
-    scanf("%d", &size);
-    array = (int *)malloc(size * sizeof(int));
-    createArray(array, size);
-    while (1)
-    {
-        printf("Enter the type of sort: \n");
-        printf("1. Quick Sort\n");
-        printf("2. Merge Sort\n");
-        printf("3. Display the array\n");
-        printf("4. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &sw);
-        switch (sw)
-        {
-        case 1:
-            printf("Quick Sort\n");
-            Quick_Sort(array, 0, size - 1);
-            printf("Done\n");
-            break;
-        case 2:
-            printf("Merge Sort\n");
-            Merge_Sort(array, 0, size - 1);
-            printf("Done\n");
-            break;
-        case 3:
-            printf("The array is : ");
-            display(array, size);
-            break;
-        case 4:
-            printf("Exiting...\n");
-            free(array);
-            return 0;
-        default:
-            printf("Invalid choice! Please try again.\n");
-            break;
+            arr[low] = arr[j];
+            arr[j] = pivot;
+            return j;
         }
     }
+}
+
+void Merge_Sort(int arr[], int low, int high)
+{
+    if(low < high)
+    {
+        int mid = (low + high) / 2;
+        Merge_Sort(arr, low, mid);
+        Merge_Sort(arr, mid + 1, high);
+        Merge(arr, low, mid, high);
+    }
+}
+
+void Merge(int arr[], int low, int mid, int high)
+{
+    int i = low;
+    int j = mid + 1;
+    int k = low;
+    int temp[high + 1];
+    while(i <= mid && j <= high)
+    {
+        if(arr[i] < arr[j])
+            temp[k++] = arr[i++];
+        else
+            temp[k++] = arr[j++];
+    }
+    while(i <= mid)
+        temp[k++] = arr[i++];
+    while(j <= high)
+        temp[k++] = arr[j++];
+    for(int i = low; i <= high; i++)
+        arr[i] = temp[i];
+}
+
+void display(int arr[], int size)
+{
+    for(int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
 }
