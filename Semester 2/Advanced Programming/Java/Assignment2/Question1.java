@@ -45,7 +45,6 @@ class Main
         {
             special = false;
         }
-        //setting the data
         c = new Customer(cust_name, cust_id, phone_number, special);
         SystemClear();
         while(whilecon)
