@@ -1,60 +1,115 @@
-//Question 8
+// Add constructors in the Student class of earlier problems so that objects can be created with 
+// i) roll only, 
+// ii) roll and name only, 
+// iii) roll, name, and score, 
+// iv) no value. 
+// Also include a copy constructor. Check whether constructors are working or not. 
+// Verify, copy constructors result in deep copy or not.
+
 import java.util.*;
+
 class Main
 {
     public static void main(String[] Tusher)
     {
-        System.out.println("Question 7 :");
-        Scanner buffer = new Scanner(System.in);
-        // String StudentName;
-        // int ClassRoll;
-        // double Score;
-        // System.out.println("Enter Student name : ");
-        // StudentName = buffer.nextLine();
-        // System.out.println("Enter Student roll : ");
-        // ClassRoll = buffer.nextInt();
-        // System.out.println("Enter Student Score : ");
-        // Score = buffer.nextDouble();
-        Student one = new Student();
-        one.Getters();
-        buffer.close();
+        Scanner buffer = new Scanner(System.in); // Scanner object
+
+        String StudentName;
+        int ClassRoll;
+        double Score;
+    
+        // Taking input for S1.
+        System.out.println("Enter Student name : ");
+        StudentName = buffer.nextLine();  
+        
+        System.out.println("Enter Student roll : ");
+        ClassRoll = buffer.nextInt();
+        
+        System.out.println("Enter Student Score : ");
+        Score = buffer.nextDouble();
+        
+        Student S1 = new Student(); // Creating object S1.
+        Student S2 = new Student(); // Creating object S2.
+        Student S3; // Initializing object S3.
+        Student S4; // Initializing object S4.
+        Student S5; // Initializing object S5.
+        Student S6; // Initializing object S6.
+        
+        System.out.println("S1 : ");
+        S1.Setters(StudentName, ClassRoll, Score); // Setting values for S1.
+        S1.Getters(); // Getting values for S1.
+        
+        System.out.println("S2 : ");
+        S1.Copy(S2); // Copying values from S1 to S2.
+        S2.Getters(); // Getting values for S2.
+
+        System.out.println("S3 : Creating S3 with only ClassRoll.");
+        S3 = new Student(ClassRoll); // Creating object S3 only with ClassRoll.
+        S3.Getters(); // Getting values for S3.
+
+        System.out.println("S4 : Creating S4 with ClassRoll and StudentName.");
+        S4 = new Student(ClassRoll, StudentName); // Creating object S4 with ClassRoll and StudentName.
+        S4.Getters(); // Getting values for S4.
+
+        System.out.println("S5 : Creating S5 with ClassRoll, StudentName and Score.");
+        S5 = new Student(ClassRoll, StudentName, Score); // Creating object S5 with ClassRoll, StudentName and Score.
+        S5.Getters(); // Getting values for S5.
+
+        System.out.println("S6 : Creating S6 with S5 using copy constructor.");
+        S6 = new Student(S5); // Creating object S6 with S5 using copy constructor.
+        S6.Getters(); // Getting values for S6.
+        
+        // Deleting S5 to check if S6 is a deep copy or not.
+        System.out.println("Deleting S5 and printing S6 to check if S6 is a deep copy or not.");
+
+        System.out.println("S6 : ");
+        S6.Getters(); // Getting values for S6.
+
+        buffer.close(); // Closing Scanner object.
     }
 }
 class Student
 {
+    // Class variables.
     String StudentName;
     int ClassRoll;
     double Score;
-    Student(int ClassRoll)
-    {
-        this.StudentName = "";
-        this.ClassRoll = ClassRoll;
-        this.Score = -1;
-    }
-    Student(String StudentName, int ClassRoll)
-    {
-        this.StudentName = StudentName;
-        this.ClassRoll = ClassRoll;
-        this.Score = -1;
-    }
-    Student(String StudentName, int ClassRoll,  double Score)
-    {
-        this.StudentName = StudentName;
-        this.ClassRoll = ClassRoll;
-        this.Score = Score;
-    }
+
+    // Constructors.
+    // Constructor Overloading
     Student()
     {
-        this.StudentName = "";
-        this.ClassRoll = -1;
-        this.Score = -1;
+        StudentName = "";
+        ClassRoll = 0;
+        Score = 0;
     }
-    Student(Student Object)
+    Student(int ClassRoll)
     {
-        this.StudentName = Object.StudentName;
-        this.ClassRoll = Object.ClassRoll;
-        this.Score = Object.Score;
+        this.ClassRoll = ClassRoll;
+        this.StudentName = "";
+        this.Score = 0;
     }
+    Student(int ClassRoll, String StudentName)
+    {
+        this.ClassRoll = ClassRoll;
+        this.StudentName = StudentName;
+        this.Score = 0;
+    }
+    Student(int ClassRoll, String StudentName, double Score)
+    {
+        this.ClassRoll = ClassRoll;
+        this.StudentName = StudentName;
+        this.Score = Score;
+    }
+    // Copy constructor.
+    Student(Student Subject)
+    {
+        this.StudentName = Subject.StudentName;
+        this.ClassRoll = Subject.ClassRoll;
+        this.Score = Subject.Score;
+    }
+
+    // Setters and Getters.
     void Setters(String StudentName, int ClassRoll, double Score)
     {
         this.StudentName = StudentName;
@@ -63,31 +118,12 @@ class Student
     }
     void Getters()
     {
-        if(this.StudentName == "")
-        {
-            System.out.println("Name of the student is not provided!");
-        }
-        else
-        {
-            System.out.println("Name of the student is - " + StudentName + ".");
-        }
-        if(this.ClassRoll == -1)
-        {
-            System.out.println("Roll of the student is not provided!");
-        }
-        else
-        {
-            System.out.println("Roll of the student is - " + ClassRoll + ".");
-        }
-        if(this.Score == -1)
-        {
-            System.out.println("Score of the student is not provided!");
-        }
-        else
-        {
-            System.out.println("Score of the student is - " + Score + ".");
-        }
+        System.out.println("Name of the student is - " + StudentName + ".");
+        System.out.println("Roll of the student is - " + ClassRoll + ".");
+        System.out.println("Score of the student is - " + Score + ".");
     }
+
+    // Copy method that copies content of the invoking object to the passed object.
     void Copy(Student Subject)
     {
         Subject.StudentName = this.StudentName;

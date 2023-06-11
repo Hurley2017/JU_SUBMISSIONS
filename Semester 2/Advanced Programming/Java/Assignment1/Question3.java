@@ -1,14 +1,18 @@
+// Write a program that accepts height in cm as int and displays the height in feet and inches. 
+// Assume, 1 inch equals 2.54 cm and 1 foot equals 30.5 cm.
+
 import java.util.*;
+
 class Main
 {
     public static void main(String[] Tusher)
     {
-        System.out.println("Question 3 :");
         Scanner buffer = new Scanner(System.in);
-        double heightincm, heightinfeet = 0, heightininches = 0;
-        double feet;
+        double heightincm, heightinfeet = 0, heightininches = 0, feet;
+
         System.out.println("Enter the height in CM");
         heightincm = buffer.nextInt();
+        
         heightinfeet = heightincm%30;
         if(heightincm < 30.5)
         {

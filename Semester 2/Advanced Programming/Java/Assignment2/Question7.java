@@ -1,102 +1,75 @@
+// Take a String input that contains multiple words. 
+// Do the following, 
+// i) number of times ‘a’ appears 
+// ii) number of time ‘and’ appears 
+// iii) whether it starts with ‘The’ or not 
+// iv) put the String into an array of characters 
+// v) display the tokens in the String ( tokens are the substrings separated by space or @ or . )
+
 import java.util.*;
+
 class Main
 {
     public static void main(String[] Tusher)
     {
-        Scanner buffer = new Scanner(System.in);
-        Console print = new Console();
+        Scanner buffer = new Scanner(System.in); // creating a Scanner object
+
+        // declaring variables
         String userInp;
         String[] result;
         char[] arr;
         int count_a = 0, count_and = 0;
-        print.outln("Enter the String : ");
-        userInp = buffer.nextLine();
+
+        System.out.println("Enter the String : ");
+        userInp = buffer.nextLine(); // taking the string as input
+
         arr = new char[userInp.length()];
-        result = userInp.split(" ");
+        result = userInp.split(" "); // splitting the string into tokens
+
         for(int i=0; i<result.length; i++)
         {
-            if(result[i].equals("a"))
+            if(result[i].equals("a") || result[i].equals("A"))
             {
-                count_a++;
+                count_a++; // counting the number of 'a' in the string
             }
-            else if(result[i].equals("and"))
+            else if(result[i].equals("and") || result[i].equals("And") || result[i].equals("AND"))
             {
-                count_and++;
+                count_and++; // counting the number of 'and' in the string
             }
         }
+
         for(int i=0; i<userInp.length(); i++)
         {
-            arr[i] = userInp.charAt(i);
+            arr[i] = userInp.charAt(i); // putting the string into an array of characters
         }
-        print.outln("1) total number of 'a' in the string is : "+count_a+".");
-        print.outln("2) total number of 'and' in the string is : "+count_and+".");
+
+        System.out.println("1) total number of 'a' in the string is : "+count_a+".");
+        System.out.println("2) total number of 'and' in the string is : "+count_and+".");
+
+        // checking whether the string starts with 'The' or not
         if(!result[0].equals("The"))
         {
-            print.outln("3) The string doesn't start with 'The'.");
+            System.out.println("3) The string doesn't start with 'The'.");
         }
         else
         {
-            print.outln("3) The string starts with 'The'.");
+            System.out.println("3) The string starts with 'The'.");
         }
-        print.outln("4) printing the array of characters : ");
+
+        System.out.println("4) printing the array of characters : ");
         for(int i=0; i<arr.length; i++)
         {
-            print.out(arr[i]+", ");
+            System.out.print(arr[i]+", ");
         }
-        print.outln();
-        print.outln("5) printing the tokens : ");
+
+        System.out.println();
+        System.out.println("5) printing the tokens : ");
         for(int i=0; i<result.length-1; i++)
         {
-            print.out(result[i]+", ");
+            System.out.print(result[i]+", "); // printing the tokens
         }
-        print.outln(result[result.length-1]);
-        buffer.close();
-    }
-}
-class Console
-{
-    void outln()
-    {
-        System.out.println("");
-    }
-    void outln(String Object)
-    {
-        System.out.println(Object);
-    }
-    void outln(int Object)
-    {
-        System.out.println(Object);
-    }
-    void outln(double Object)
-    {
-        System.out.println(Object);
-    }
-    void outln(long Object)
-    {
-        System.out.println(Object);
-    }
-    void outln(boolean Object)
-    {
-        System.out.println(Object);
-    }
-    void out(String Object)
-    {
-        System.out.print(Object);
-    }
-    void out(int Object)
-    {
-        System.out.print(Object);
-    }
-    void out(double Object)
-    {
-        System.out.print(Object);
-    }
-    void out(long Object)
-    {
-        System.out.print(Object);
-    }
-    void out(boolean Object)
-    {
-        System.out.print(Object);
+        System.out.println(result[result.length-1]);
+
+        buffer.close(); // closing the buffer
     }
 }
