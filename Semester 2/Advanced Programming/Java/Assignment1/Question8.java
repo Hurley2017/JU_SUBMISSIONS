@@ -61,7 +61,7 @@ class Main
         
         // Deleting S5 to check if S6 is a deep copy or not.
         System.out.println("Deleting S5 and printing S6 to check if S6 is a deep copy or not.");
-
+        S5 = null;
         System.out.println("S6 : ");
         S6.Getters(); // Getting values for S6.
 
