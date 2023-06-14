@@ -20,9 +20,9 @@ void delete(int *head, int *size, int index);
 int main()
 {
     int size = INT_MIN, sw, *head, target, special;
+    UI_Statements();
     while(1)
     {
-        UI_Statements();
         printf("Enter Choice : ");
         scanf("%d", &sw);
         switch (sw)

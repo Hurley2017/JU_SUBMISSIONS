@@ -41,9 +41,10 @@ int main()
     display(poly2);
     newline();
     newline();
+    UI_Statements();
     while(1)
     {
-        UI_Statements();
+        printf("Enter choice : ");
         scanf("%d", &sw);
         switch(sw)
         {
@@ -233,7 +234,6 @@ void UI_Statements()
     newline();
     printf("6. Exit");
     newline();
-    printf("Enter choice : ");
 }
 struct Slist *init(int size)
 {

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#define location "/home/tusher/Desktop/JU_SUBMISSIONS/Semester 2/DSA/3_39/3.txt"
+#define location "3.txt"
 #define read "r"
 typedef struct
 {

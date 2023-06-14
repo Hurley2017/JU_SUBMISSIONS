@@ -16,9 +16,10 @@ int main()
 {
     int sw, con = 1, element, size, value0, value1, init_done = 1;
     Stack s1;
+    UI_Statements();
     while(con)
     {
-        UI_Statements();
+        printf("Enter your choice : ");
         scanf("%d", &sw);
         switch (sw)
         {
@@ -99,7 +100,6 @@ void UI_Statements()
     printf("6) Clear Screen (For Windows)\n");
     printf("7) Clear Screen (For Linux)\n");
     printf("8) Exit\n");
-    printf("Enter your choice : ");
 }
 void display(Stack *s)
 {

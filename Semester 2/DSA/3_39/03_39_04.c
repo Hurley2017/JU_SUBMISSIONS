@@ -13,6 +13,7 @@ int pop(Stack *s);
 int peek(Stack *s);
 int isEmpty(Stack s);
 int isEqual(Stack r, Stack l);
+void UI_Statements();
 int main()
 {
     Stack s1, s2;
@@ -20,9 +21,82 @@ int main()
     printf("Size of Stack 1 : ");
     scanf("%d", &size1);
     init(&s1, size1);
+    UI_Statements();
+    while(con)
+    {
+        printf("Enter choice : ");
+        scanf("%d", &sw);
+        switch(sw)
+        {
+            case 1:
+                printf("Enter Value : ");
+                scanf("%d", &con);
+                push(&s1, con);
+                break;
+            case 2:
+                printf("%d\n", pop(&s1));
+                break;
+            case 3:
+                printf("%d\n", peek(&s1));
+                break;
+            case 4:
+                display(&s1);
+                break;
+            case 5:
+                con = 0;
+                break;
+            default:
+                printf("Invalid Input!\n");
+        }
+    }
     printf("Size of Stack 2 : ");
     scanf("%d", &size2);
     init(&s2, size2);
+    con = 1;
+    UI_Statements();
+    while(con)
+    {
+        printf("Enter choice : ");
+        scanf("%d", &sw);
+        switch(sw)
+        {
+            case 1:
+                printf("Enter Value : ");
+                scanf("%d", &con);
+                push(&s2, con);
+                break;
+            case 2:
+                printf("%d\n", pop(&s2));
+                break;
+            case 3:
+                printf("%d\n", peek(&s2));
+                break;
+            case 4:
+                display(&s2);
+                break;
+            case 5:
+                con = 0;
+                break;
+            default:
+                printf("Invalid Input!\n");
+        }
+    }
+    if(isEqual(s1, s2))
+    {
+        printf("Equal\n");
+    }
+    else
+    {
+        printf("Not Equal\n");
+    }
+}
+void UI_Statements()
+{
+    printf("1. Push\n");
+    printf("2. Pop\n");
+    printf("3. Peek\n");
+    printf("4. Display\n");
+    printf("5. Done\n");
 }
 int isEqual(Stack r, Stack l)
 {
@@ -43,7 +117,6 @@ int isEqual(Stack r, Stack l)
     }
     return 1;
 }
-
 int isEmpty(Stack s)
 {
     if(s.top == 0)
