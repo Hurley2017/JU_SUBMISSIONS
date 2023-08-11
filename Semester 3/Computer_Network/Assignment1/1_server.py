@@ -8,7 +8,7 @@ Reset = 'Hello Client with Address : '
 Server_Socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 Server_Socket.bind((IP_ADDR, TCP_PORT))
 
-print("Server is running and will be listening on port 5000 : ")
+print("Server is running and will be listening on port ", TCP_PORT, " : ")
 
 while True:
     Server_Socket.listen(1)

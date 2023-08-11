@@ -45,3 +45,13 @@ def Tokenizing_Operands(arg):
             temp += char
     res.append(temp)
     return res
+
+def Read_File():
+    Collective_Info = {}
+    name = ''
+    with open('input.txt', 'r') as file:
+        data = file.read()
+    for line in data.split('\n'):
+        name = line.split(' ')[0] + ' ' + line.split(' ')[1]
+        Collective_Info[name] = ' '.join(line.split(' ')[2:])
+    return Collective_Info
