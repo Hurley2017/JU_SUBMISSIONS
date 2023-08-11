@@ -22,7 +22,12 @@ print("Server is running and will be listening on port ", LOCAL_PORT, " : ")
 
 while True:
     # Read collective information from a file using the Additional_Functions module
-    Collective_Info = AF.Read_File()
+    #try block to handle any exceptions
+    try:
+        Collective_Info = AF.Read_File()
+    except:
+        print("Error reading file!")
+        break
 
     # Receive incoming packet from the client
     Incoming_Packet = Server_Socket.recvfrom(BUF_SIZE)

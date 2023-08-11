@@ -1,5 +1,5 @@
 import socket
-import Additional_Functions as AF  # Assuming this module contains necessary functions
+import Additional_Functions as AF  # This module contains necessary functions
 
 # Define the TCP port and IP address to bind the server socket
 TCP_PORT = 5000
@@ -36,15 +36,15 @@ while True:
     try:
         # Attempt to tokenize and convert the incoming arithmetic expression to postfix
         Incoming_Data = AF.Tokenizing_Operands(Incoming_Data)
-        Incoming_Data = AF.Arithmetic_Expression_to_PostFix(Incoming_Data)
+        Incoming_Data = AF.Arithmatic_Expression_to_PostFix(Incoming_Data)
+        Incoming_Data = AF.PostFix_Expression_Evaluation(Incoming_Data)
     except:
         # Handle any exceptions (e.g., invalid expression)
         Incoming_Data = 'Invalid Expression'
 
     if Incoming_Data != 'Invalid Expression':
         # Evaluate the postfix expression and generate a reply
-        Result = AF.PostFix_Expression_Evaluation(Incoming_Data)
-        Reply = Reset + str(Client_Address) + '. The Result is: ' + str(Result)
+        Reply = Reset + str(Client_Address) + '. The Result is: ' + str(Incoming_Data)
         # Send the reply back to the client after encoding
         Client_Socket.send(Reply.encode())
     else:

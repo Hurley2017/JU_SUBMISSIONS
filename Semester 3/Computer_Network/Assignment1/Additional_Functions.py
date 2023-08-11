@@ -53,7 +53,7 @@ def Tokenizing_Operands(arg):
 def Read_File():
     Collective_Info = {}  # Initialize an empty dictionary
     name = ''  # Initialize a variable to store the name
-    with open('input.txt', 'r') as file:
+    with open('./Files/input.txt', 'r') as file:
         data = file.read()  # Read data from the file
     for line in data.split('\n'):
         name = line.split(' ')[0] + ' ' + line.split(' ')[1]  # Extract the name from the line
