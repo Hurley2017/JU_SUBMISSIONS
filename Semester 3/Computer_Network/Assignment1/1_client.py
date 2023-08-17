@@ -7,25 +7,22 @@ IP_ADDR = '127.0.0.1'
 # Define the buffer size for receiving data
 BUF_SIZE = 1024
 
-while True:
     # Create a new client socket using IPv4 and TCP
-    Client_Socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+Client_Socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-    # Connect the client socket to the server
-    Client_Socket.connect((IP_ADDR, TCP_PORT))
+# Connect the client socket to the server
+Client_Socket.connect((IP_ADDR, TCP_PORT))
 
-    # Prompt the user to enter a command
-    Command = input('Enter a command: ')
+# Prompt the user to enter a command
+Command = input('Enter a command: ')
 
-    # Send the entered command to the server after encoding it
-    Client_Socket.send(Command.encode())
+# Send the entered command to the server after encoding it
+Client_Socket.send(Command.encode())
 
-    # Receive the server's reply and decode it
-    Reply = Client_Socket.recv(BUF_SIZE).decode()
+# Receive the server's reply and decode it
+Reply = Client_Socket.recv(BUF_SIZE).decode()
 
-    # Print the server's reply
-    print("Server replied: '", Reply, "'")
+# Print the server's reply
+print("Server replied: '", Reply, "'")
 
-# Note: This loop runs indefinitely, allowing the client to repeatedly
-# connect to the server, send a command, receive a reply, and display it.
-# To stop the client, you may need to manually terminate the program.
+Client_Socket.close()
