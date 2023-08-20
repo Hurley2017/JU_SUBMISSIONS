@@ -35,9 +35,13 @@ while True:
 
     try:
         # Attempt to tokenize and convert the incoming arithmetic expression to postfix
+        print(Incoming_Data)
         Incoming_Data = AF.Tokenizing_Operands(Incoming_Data)
-        Incoming_Data = AF.Arithmatic_Expression_to_PostFix(Incoming_Data)
+        print(Incoming_Data)
+        Incoming_Data = AF.Arithmatic_Expression_Infix_to_PostFix(Incoming_Data)
+        print(Incoming_Data)
         Incoming_Data = AF.PostFix_Expression_Evaluation(Incoming_Data)
+        print(Incoming_Data)
     except:
         # Handle any exceptions (e.g., invalid expression)
         Incoming_Data = 'Invalid Expression'
