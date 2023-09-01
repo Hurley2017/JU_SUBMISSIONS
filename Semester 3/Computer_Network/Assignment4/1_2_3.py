@@ -1,5 +1,5 @@
 from scapy.all import sniff
-NUMBER_COUNT = input('How many packets to capture?') 
+NUMBER_COUNT = int(input('How many packets to capture?')) 
 print('Question 1 : ')
 CAPTURED_Packets = sniff(count = NUMBER_COUNT, filter = 'tcp or udp or icmp')
 for Packet in CAPTURED_Packets:
