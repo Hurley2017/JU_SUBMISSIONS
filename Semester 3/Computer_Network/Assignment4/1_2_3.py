@@ -14,6 +14,7 @@ for Packets in CAPTURED_Packets:
     except:
         pass
 print('COUNT OF DISTINCT HOSTS : ', len(Distinct_Hosts))
+print('THEY ARE ', Distinct_Hosts)
 
 print('\n\nQuestion 3 : ')
 Distinct_Pair = {}
