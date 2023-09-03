@@ -19,11 +19,11 @@ for Packet in CAPTURED_Packets:
         Current_IP_proto = Proto_Dictionary[Packet['IP'].proto]
         Current_IP_sport = Packet[Current_IP_proto].sport
         Current_IP_dport = Packet[Current_IP_proto].dport
-        if (Current_IP_src, Current_IP_sport, Current_IP_dst, Current_IP_dport) not in Distinct_Pair:
-            Distinct_Pair[(Current_IP_src, Current_IP_sport, Current_IP_dst, Current_IP_dport)] = [Current_IP_proto, 1, [len(Packet[Current_IP_proto].payload)], 0]
+        if (Current_IP_src, Current_IP_sport, Current_IP_dst, Current_IP_dport, Current_IP_proto) not in Distinct_Pair:
+            Distinct_Pair[(Current_IP_src, Current_IP_sport, Current_IP_dst, Current_IP_dport)] = [1, [len(Packet[Current_IP_proto].payload)], 0]
         else:
-            Distinct_Pair[(Current_IP_src, Current_IP_sport, Current_IP_dst, Current_IP_dport)][1] += 1
-            Distinct_Pair[(Current_IP_src, Current_IP_sport, Current_IP_dst, Current_IP_dport)][2].append(len(Packet[Current_IP_proto].payload))
+            Distinct_Pair[(Current_IP_src, Current_IP_sport, Current_IP_dst, Current_IP_dport, Current_IP_proto)][0] += 1
+            Distinct_Pair[(Current_IP_src, Current_IP_sport, Current_IP_dst, Current_IP_dport)][1].append(len(Packet[Current_IP_proto].payload))
     except:
         pass
 
