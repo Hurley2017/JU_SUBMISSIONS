@@ -111,7 +111,6 @@ def Host_IP_Generator(Network_Address, Network_Bits):
                 j += 1
             j += 1
         Result.append(copy.copy(Net_ID))
-    Result = Data_Stringyfy(Result)
     return Result
 
 def Data_Stringyfy(Result):
@@ -123,14 +122,14 @@ def Data_Stringyfy(Result):
         Result[i] = temp
     return Result
 
-USER_INPUT = input("Enter Network Address : ")
-Network_Address, Network_Bits = Network_Tuple(USER_INPUT)
-print(Network_Address, Network_Bits)
-print("Network ID", Network_ID(Network_Address, Network_Bits))
-print("Subnet Mask", Subnet_Generator(Network_Bits))
-print("Wild Card", Wild_Card(Subnet_Generator(Network_Bits)))
-print("Total Hosts", Total_Hosts(Network_Bits))
-print("Broadcast ID", Broadcast_ID(Network_Address, Network_Bits))
-print("Generated Host IP", Host_IP_Generator(Network_Address, Network_Bits))
+# USER_INPUT = input("Enter Network Address : ")
+# Network_Address, Network_Bits = Network_Tuple(USER_INPUT)
+# print(Network_Address, Network_Bits)
+# print("Network ID", Network_ID(Network_Address, Network_Bits))
+# print("Subnet Mask", Subnet_Generator(Network_Bits))
+# print("Wild Card", Wild_Card(Subnet_Generator(Network_Bits)))
+# print("Total Hosts", Total_Hosts(Network_Bits))
+# print("Broadcast ID", Broadcast_ID(Network_Address, Network_Bits))
+# print("Generated Host IP", Data_Stringyfy(Host_IP_Generator(Network_Address, Network_Bits)))
 
 
