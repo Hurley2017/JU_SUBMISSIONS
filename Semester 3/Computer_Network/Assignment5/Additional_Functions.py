@@ -110,14 +110,16 @@ def Host_IP_Generator(Network_Address, Network_Bits):
                     j += 1
                 j += 1
             j += 1
-        Result.append(copy.copy(Net_ID))
+        Result.append(Strfy(copy.copy(Net_ID)))
     return Result
+
+def Strfy(IPV4):
+    temp = ""
+    for Oct in IPV4:
+        temp += "."+str(Oct)
+    return temp[1:]
 
 def Data_Stringyfy(Result):
     for i in range(len(Result)):
-        temp = ""
-        for Oct in Result[i]:
-            temp += "."+str(Oct)
-        temp = temp[1:]
-        Result[i] = temp
+        Result[i] = Strfy(Result[i])
     return Result
