@@ -13,9 +13,16 @@ print(Network_Address, Network_Bits)
 print(Network_ID, Subnet_Mask, Broadcast_ID, Total_Hosts, Generated_Host_Addresses)
 
 Alive_Hosts = set()
+print("Processing...")
+print("Sending echo request to all hosts...")
 for Host in Generated_Host_Addresses:
-    packet = srp1(IP(dst=Host)/ICMP()/"DUMMY", timeout = 0.5)
-    if packet:
+    print("Ping to", Host, " : ")
+    AF.blockPrint()
+    if AF.Echo_Ping(Host, 1):
+        AF.enablePrint()
         Alive_Hosts.add(Host)
+        print("UP\n")
+    else:
+        print("DOWN\n")
 
-print(Alive_Hosts)
+print("These Hosts are alive : ", Alive_Hosts)

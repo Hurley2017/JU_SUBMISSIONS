@@ -1,4 +1,24 @@
 import copy
+import sys, os
+from scapy.all import IP, ICMP, sr1
+def blockPrint():
+    sys.stdout = open(os.devnull, 'w')
+
+def enablePrint():
+    sys.stdout = sys.__stdout__
+
+def Echo_Ping(Host_Address, Time):
+    Packet = IP(dst=Host_Address)/ICMP()/"DUMMY"
+    resp = sr1(Packet, timeout=Time)
+    if resp == None:
+        return False
+    else:
+        ICMP_TYPE = resp['ICMP'].type
+        if ICMP_TYPE == 0:
+            return True
+        else:
+            return False
+
 def NumToBin(num):
     bin = ''
     while num >= 2:
