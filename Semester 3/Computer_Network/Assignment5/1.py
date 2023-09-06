@@ -17,12 +17,7 @@ print("Processing...")
 print("Sending echo request to all hosts...")
 for Host in Generated_Host_Addresses:
     print("Ping to", Host, " : ")
-    AF.blockPrint()
-    if AF.Echo_Ping(Host, 1):
-        AF.enablePrint()
+    if AF.Echo_Ping(Host):
         Alive_Hosts.add(Host)
-        print("UP\n")
-    else:
-        print("DOWN\n")
 
 print("These Hosts are alive : ", Alive_Hosts)
