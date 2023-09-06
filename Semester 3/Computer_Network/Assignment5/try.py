@@ -1,21 +1,9 @@
-from scapy.all import IP, ICMP, sr1
+# from scapy.all import IP, ICMP, srp
 
-import sys, os
 
-def blockPrint():
-    sys.stdout = open(os.devnull, 'w')
+# def ping(ip, to):
+#     packet = IP(dst=ip) / ICMP()
+#     resp = srp(packet, timeout=to, verbose=False)[0]
+#     print(resp)
 
-def enablePrint():
-    sys.stdout = sys.__stdout__
-
-def ping(ip, to):
-    print(to)
-    icmp = IP(dst=ip)/ICMP()/"DUMMY"
-    # blockPrint()
-    resp = sr1(icmp, timeout=to)
-    # enablePrint()
-    if resp != None:
-        resp.show()
-        print(resp.summary())
-
-ping('192.168.0.190', 1)
+# ping('192.168.0.2', 1)

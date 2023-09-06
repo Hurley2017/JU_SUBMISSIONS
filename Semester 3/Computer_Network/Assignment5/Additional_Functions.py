@@ -8,7 +8,7 @@ def enablePrint():
     sys.stdout = sys.__stdout__
 
 def Echo_Ping(Host_Address, Time):
-    Packet = IP(dst=Host_Address)/ICMP()/"DUMMY"
+    Packet = IP(dst=Host_Address)/ICMP()/"DUMMY_DATA"
     resp = sr1(Packet, timeout=Time)
     if resp == None:
         return False
