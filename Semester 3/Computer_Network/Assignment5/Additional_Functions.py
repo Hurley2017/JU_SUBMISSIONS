@@ -1,5 +1,5 @@
 import copy
-from scapy.all import IP, ICMP, srloop
+from scapy.all import IP, TCP, ICMP, srloop ,sr1
 
 # def Echo_Ping(Host_Address, Time):
 #     Packet = IP(dst=Host_Address)/ICMP()/"DUMMY_DATA"
@@ -12,6 +12,14 @@ from scapy.all import IP, ICMP, srloop
 #             return True
 #         else:
 #             return False
+
+
+def TCP_SEND(Host, Port, Alive_Hosts):
+    Packet = IP(dst=Host)/TCP(dport=Port, flags="S")
+    Response = sr1(Packet, timeout=1)
+    if Response != None and Response['TCP'].flags == "SA":
+        print(Response['TCP'].flags)
+        Alive_Hosts.add((Host, Port))
 
 def Echo_Ping(Host_Address):
     Packet = IP(dst=Host_Address) / ICMP() / "Hello"
